@@ -1,0 +1,99 @@
+<app-content-header header-text="Your tickets"></app-content-header>
+
+<ng-container *ngIf="boughtPage != undefined && reservedPage != undefined">
+  <ng-container *ngIf="boughtPage.content || reservedPage.content">
+    <div class="row">
+      <div class="col-12">
+        <h2>Bought</h2><br>
+        <ng-container *ngFor="let entry of boughtPage.content">
+          <app-ticket-entry [entry]="entry"></app-ticket-entry>
+        </ng-container>
+      </div>
+    </div>
+
+    <ng-container *ngIf="!boughtPage.content || !boughtPage.content.length">
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-4">
+          <p>You have no bought tickets!</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-4">
+        <nav aria-label="page navigation">
+          <ul class="pagination">
+            <ng-container *ngIf="!boughtPage.first">
+              <li class="page-item"><a class="page-link" (click)="previousBoughtPage();loadBoughtTickets();">Previous
+                Page</a></li>
+            </ng-container>
+            <ng-container *ngIf="!boughtPage.last">
+              <li class="page-item"><a class="page-link" (click)="nextBoughtPage();loadBoughtTickets();">Next Page</a>
+              </li>
+            </ng-container>
+          </ul>
+        </nav>
+        <ng-container *ngIf="boughtPage.content && boughtPage.content.length">
+          <p style="color: #999">
+            Page {{boughtTicketQuery.page + 1}} / {{boughtPage.totalPages}}<br>
+            Entries {{boughtPage.content.length}} / {{boughtPage.totalElements}}
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+
+
+
+  <div class="row">
+    <div class="col-12">
+      <br><br>
+      <h2>Reserved</h2><br>
+      <ng-container *ngFor="let entry of reservedPage.content">
+        <app-ticket-entry [entry]="entry"></app-ticket-entry>
+      </ng-container>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!reservedPage.content">
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-4">
+        <p>You have no bought tickets!</p>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4">
+      <nav aria-label="page navigation">
+        <ul class="pagination">
+          <ng-container *ngIf="!reservedPage.first">
+            <li class="page-item"><a class="page-link" (click)="previousReservedPage();loadReservedTickets();">Previous
+              Page</a></li>
+          </ng-container>
+          <ng-container *ngIf="!reservedPage.last">
+            <li class="page-item"><a class="page-link" (click)="nextReservedPage();loadReservedTickets();">Next Page</a>
+            </li>
+          </ng-container>
+        </ul>
+      </nav>
+      <ng-container *ngIf="reservedPage.content">
+        <p style="color: #999">
+          Page {{reservedTicketQuery.page + 1}} / {{reservedPage.totalPages}}<br>
+          Entries {{reservedPage.content.length}} / {{reservedPage.totalElements}}
+        </p>
+      </ng-container>
+    </div>
+  </div>
+
+
+
+<ng-container *ngIf="!boughtPage.content && !reservedPage.content">
+  <div class="row" style="margin-top: 10px; font-size: 20px;">
+    <div class="col-6">
+      <p>You have no bought or reserved tickets yet! <br> <a routerLink="/events"> Get your Tickets now </a></p>
+    </div>
+  </div>
+</ng-container>
+
+</ng-container>

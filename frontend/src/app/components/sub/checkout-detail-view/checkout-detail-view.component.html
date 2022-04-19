@@ -1,0 +1,47 @@
+<div class="row content">
+  <div class="col-3 meta-container">
+    <div class="image">
+      <img src="assets/sample_1.jpg">
+    </div>
+    <h4 class="title">{{ ticket.title }}</h4>
+  </div>
+  <div class="col-9 content-container">
+    <div class="row mb-2">
+      <div class="col-12">
+        <h5>Tickets for: <b>{{ ticket.title }}</b></h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <div class="mr-4"><b>Seats:</b></div>
+      </div>
+      <div class="col-auto">
+        <div class="flex flex-column" *ngIf="ticket.seats.length <= 0">
+          <div class="mb-1">No seats selected.</div>
+        </div>
+        <div class="flex flex-column" *ngIf="ticket.seats.length > 0">
+          <div class="mb-1" *ngFor="let seatText of getSelectedSeatText(ticket.seats)">{{ seatText }}</div>
+        </div>
+        <hr class="mt-2 mb-2 bg-light">
+        <p>Your total is: {{ getTotal() }}€</p>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-2">
+        <div><b>Start time:</b></div>
+      </div>
+      <div class="col-auto">{{ ticket.date | date : 'mediumDate' }} at {{ ticket.date | date : 'H:mm' }}</div>
+    </div>
+    <div class="row mb-1">
+      <div class="col-2">
+        <div><b>Location:</b></div>
+      </div>
+      <div class="col-auto">{{ ticket.locationName }}, Hall: {{ ticket.hallName }}</div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

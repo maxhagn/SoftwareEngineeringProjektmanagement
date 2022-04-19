@@ -1,0 +1,116 @@
+<app-content-header header-text="Locations">
+  <button *ngIf="authService.getUserRole() ===  this.role" class="btn btn-primary" [routerLink]="['/location/create']">Create location</button>
+</app-content-header>
+
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error! </strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <app-input-box label="Search for Locations">
+      <input type="text" maxlength="255" name="search_mixed" [disabled]="extendedSearchFlag" [(ngModel)]="locationQuery.mixedQuery" (keyup)="loadLocations();" id="search_mixed" class="form-control" placeholder="Enter Query">
+    </app-input-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-auto">
+        <button type="button" class="btn btn-outline-secondary" (click)="setSearchLevel();" data-toggle="collapse" data-target="#searchbox">{{extendedSearchButtonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse" style="margin-bottom: 50px;" id="searchbox">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-6">
+        <app-input-box label="Name">
+          <input type="text" maxlength="255" name="name" [(ngModel)]="locationQuery.name" (keyup)="loadLocations();" id="name" class="form-control" placeholder="Enter Name">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Street">
+          <input type="text" maxlength="255" name="street" [(ngModel)]="locationQuery.street" (keyup)="loadLocations();" id="street" class="form-control" placeholder="Enter street">
+        </app-input-box>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <app-input-box label="City">
+          <input type="text" maxlength="255" name="city" [(ngModel)]="locationQuery.city" (keyup)="loadLocations();" id="city" class="form-control" placeholder="Enter city">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Area code">
+          <input type="text" name="areacode" [(ngModel)]="locationQuery.plz" (keyup)="loadLocations();" id="areacode" class="form-control" placeholder="Enter area code">
+        </app-input-box>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-6 text-right">
+
+      </div>
+      <div class="col-2">
+        <app-input-box label="Order">
+          <select [(ngModel)]="locationQuery.order" (change)="loadLocations();" class="form-control">
+            <option [value]="'asc'">Ascending</option>
+            <option [value]="'desc'">Descending</option>
+          </select>
+        </app-input-box>
+
+      </div>
+      <div class="col-4">
+        <app-input-box label="Sort By">
+          <select  [(ngModel)]="locationQuery.sortedBy" (change)="loadLocations();" class="form-control">
+            <option [value]="'name'">Name</option>
+            <option [value]="'street'">Street</option>
+            <option [value]="'city'">City</option>
+            <option [value]="'area_code'">Area Code</option>
+          </select>
+        </app-input-box>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 50px;">
+  <ng-container *ngFor="let entry of page.content">
+    <app-locations-entry [entry]="entry" [routerLink]="['/location', entry.id]"></app-locations-entry>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="!page.content.length">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4">
+      <p>There are no Locations matching your criteria!</p>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" style="margin-top: 10px;">
+  <div class="col-4">
+    <nav aria-label="page navigation">
+      <ul class="pagination">
+        <ng-container *ngIf="!page.first">
+          <li class="page-item"><a class="page-link" (click)="previousPage();loadLocations();">Previous Page</a></li>
+        </ng-container>
+        <ng-container *ngIf="!page.last">
+          <li class="page-item"><a class="page-link" (click)="nextPage();loadLocations();">Next Page</a></li>
+        </ng-container>
+      </ul>
+    </nav>
+    <ng-container *ngIf="page.content.length">
+      <p style="color: #999">
+        Page {{locationQuery.page+1}} / {{page.totalPages}}<br>
+        Entries {{page.content.length}} / {{page.totalElements}}
+      </p>
+    </ng-container>
+  </div>
+</div>

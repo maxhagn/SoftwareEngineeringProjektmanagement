@@ -1,0 +1,49 @@
+<app-error-box [(error-message)]="errorMessage"></app-error-box>
+
+<div class="next">
+  <div class="hall-view grid" [ngStyle]="{
+    gridTemplateColumns: 'repeat(' + location.cols + ', 2rem)',
+    gridTemplateRows: 'repeat(' + location.rows + ', 2rem)'
+  }">
+
+    <div *ngFor="let screen of screens" class="screen" [ngStyle]="{gridColumn: screen.col, gridRow: screen.row}">
+      {{screen.name}}
+    </div>
+
+    <div *ngFor="let place of seatsAndAreas" class="seat" (click)="toggleSelect(place)" [ngClass]="place.available?['seat available']:['seat']"
+         [ngStyle]="{ gridColumn: place.col, gridRow: place.row, backgroundColor:place.getColor(), border: place.getBorder() }">
+      <div class="box-child d-flex align-items-center justify-content-center">{{place.name}}{{ place.type == "SECTION" ? " (Free: " + place.freeCount + ")" : "" }}</div>
+    </div>
+
+    <ng-container *ngFor="let category of categories">
+      <div *ngFor="let area of category.areas" [ngStyle]="{
+        gridArea : area.getCoordinatesAsGridAreaString(),
+        backgroundColor : category.color
+      }">
+      </div>
+    </ng-container>
+
+
+  </div>
+
+  <div class="hall-legende">
+    <h5>Legende</h5>
+    <div><span class="seat-legende seat-legende-border"></span> availabe</div>
+    <div><span class="seat-legende" style="background-color: grey;"></span> unavailabe</div>
+    <div><span class="seat-legende" style="background-color: lightgreen;"></span> selected</div>
+    <div *ngFor="let category of categories">
+      <span class="seat-legende seat-legende-border" [ngStyle]="{ backgroundColor: category.color }">
+      </span> {{ category.name }}: {{ category.price + performance.minPrice }}€
+    </div>
+  </div>
+</div>
+
+<ng-template #chooseSeats let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Number of seats?</h4>
+  </div>
+  <div class="modal-body d-flex flex-column">
+    <input type="text" class="form-control" min="1" [(ngModel)]="seatNumber">
+    <button type="button" class="mt-4 btn btn-primary" aria-label="Close" (click)="modal.close()">Done</button>
+  </div>
+</ng-template>

@@ -1,0 +1,129 @@
+<app-content-header header-text="Events">
+  <button *ngIf="authService.getUserRole() ===  this.role" class="btn btn-primary" [routerLink]="['/event/create']">Create Event</button>
+</app-content-header>
+
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error! </strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <app-input-box label="Search for Events">
+      <input type="text" maxlength="255" minlength="0" name="search_mixed" [disabled]="extendedSearchFlag" [(ngModel)]="eventQuery.title" (keyup)="loadMixedEvents();" id="search_mixed" class="form-control" placeholder="Enter Query">
+    </app-input-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-auto">
+        <button type="button" class="btn btn-outline-secondary" (click)="changeFlag();" data-toggle="collapse" data-target="#searchbox">{{searchButtonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse" style="margin-bottom: 50px;" id="searchbox">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-6">
+        <app-input-box label="Title">
+          <input type="text" name="title" id="title" (keyup)="loadDetailedEvents()" [(ngModel)]="eventQuery.titleExtended"  class="form-control" placeholder="Enter title">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Type">
+          <select class="form-control" (change)="loadDetailedEvents()" [(ngModel)]="eventQuery.type" id="categories-id">
+            <option [value]="'ALL'" selected="selected">All</option>
+            <option [value]="'ACTION'">Action</option>
+            <option [value]="'COMEDY'">Comedy</option>
+            <option [value]="'DOCUMENTATION'">Documentation</option>
+          </select>
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Duration ( +/- 30 min )">
+          <input type="number" name="duration" (keyup)="loadDetailedEvents()" [(ngModel)]="eventQuery.duration" id="duration" class="form-control" placeholder="Enter duration">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Description">
+          <input type="text" name="content" (keyup)="loadDetailedEvents()" [(ngModel)]="eventQuery.content" id="content" class="form-control" placeholder="Enter content">
+        </app-input-box>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 20px">
+      <div class="col-6 text-right">
+
+      </div>
+      <div class="col-2">
+        <app-input-box label="Order">
+          <select [(ngModel)]="eventQuery.order" (change)="loadDetailedEvents();" class="form-control">
+            <option [value]="'asc'">Ascending</option>
+            <option [value]="'desc'">Descending</option>
+          </select>
+        </app-input-box>
+
+      </div>
+      <div class="col-4">
+        <app-input-box label="Sort By">
+          <select  [(ngModel)]="eventQuery.sortedBy" (change)="loadDetailedEvents();" class="form-control">
+            <option [value]="'title'">Title</option>
+            <option [value]="'category'">Category</option>
+            <option [value]="'duration'">Duration</option>
+            <option [value]="'description'">Description</option>
+          </select>
+        </app-input-box>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="row" style="margin-top: 50px;">
+  <ng-container *ngFor="let entry of page.content">
+    <app-events-entry [entry]="entry" [routerLink]="['/event/', entry.id]"></app-events-entry>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="!page.content.length">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4">
+      <p>There are no Events matching your criteria!</p>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" style="margin-top: 10px;">
+  <div class="col-4">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <ng-container *ngIf="!page.first">
+          <li class="page-item"><a class="page-link" (click)="previousPage();loadEvents();">Previous Page</a></li>
+        </ng-container>
+        <ng-container *ngIf="!page.last">
+          <li class="page-item"><a class="page-link" (click)="nextPage();loadEvents();">Next Page</a></li>
+        </ng-container>
+      </ul>
+    </nav>
+    <ng-container *ngIf="page.content.length">
+      <p style="color: #999">
+        Page {{eventQuery.page+1}} / {{page.totalPages}}<br>
+        {{page.content.length}} / {{page.totalElements}} Entries
+      </p>
+    </ng-container>
+  </div>
+</div>
+
+
+<!--
+<div class="row">
+  <ng-container *ngFor="let entry of events">
+    <app-events-entry [entry]="entry" [routerLink]="['/event', 0]"></app-events-entry>
+  </ng-container>
+</div>
+-->

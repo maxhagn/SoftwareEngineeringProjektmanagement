@@ -1,0 +1,17 @@
+:host {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions ::ng-deep *:not(:first-child) {
+  margin-left: 1rem;
+}

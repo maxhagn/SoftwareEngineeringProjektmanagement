@@ -1,0 +1,114 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<app-info-box [info-message]="infoMessage"></app-info-box>
+
+<app-form-box form-title="Create event" (on-submit)="onSubmit(eventForm.value)" back-link="/events">
+  <form [formGroup]="eventForm">
+    <app-input-box label="Title">
+      <input class="form-control" id="title-id" formControlName="title" type="text" placeholder="Enter title">
+      <div *ngIf="submitted && eventForm.controls.title.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.title.errors.required">Title is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Description">
+      <input class="form-control" id="description-id" formControlName="description" type="text"
+             placeholder="Enter description">
+      <div *ngIf="submitted && eventForm.controls.description.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.description.errors.required">Description is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Categories">
+      <select class="form-control" formControlName="category" id="categories-id">
+        <option>ACTION</option>
+        <option>COMEDY</option>
+        <option>DOCUMENTATION</option>
+      </select>
+      <div *ngIf="submitted && eventForm.controls.category.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.category.errors.required">Category is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Duration">
+      <div class="min"><input class="form-control" formControlName="duration" id="duration-id" type="number"></div>
+      <div *ngIf="submitted && eventForm.controls.duration.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.duration.errors.required">Duration is
+          required!</small>
+      </div>
+    </app-input-box>
+    <!--<app-input-box label="Image">
+      <div class="input-group">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+          <span class="custom-file-label">Choose file</span>
+        </div>
+      </div>
+    </app-input-box>-->
+    <app-input-box label="Artist">
+      <select class="form-control" id="artist-id" formControlName="artist">
+        <option *ngFor="let artist of artists"
+                [ngValue]="artist.id">{{artist.firstname.concat(' '.concat(artist.surname))}}</option>
+      </select>
+      <div *ngIf="submitted && eventForm.controls.artist.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.artist.errors.required">Artist is
+          required!</small>
+      </div>
+    </app-input-box>
+      <app-input-box label="Artist's Cut">
+        <input class="form-control" type="number" formControlName="cut">
+        <div *ngIf="submitted && eventForm.controls.cut.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.cut.errors.required">Artist's Cut is
+          required!</small>
+        <small class="form-text text-warning" *ngIf="eventForm.controls.cut.errors.min">Artist's Cut must be at least 0</small>
+        </div>
+      </app-input-box>
+    <app-input-box label="Location">
+      <select class="form-control" id="location" formControlName="location" (change)="updateHalls()">
+        <option *ngFor="let location of locations" [ngValue]="location">{{location.name}}</option>
+      </select>
+      <div *ngIf="submitted && eventForm.controls.location.errors" class="error">
+        <small class="form-text text-warning" *ngIf="eventForm.controls.artist.errors.required">Location is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Performances">
+      <table class="table mt-2">
+        <thead>
+        <tr>
+          <th scope="col">Date and Start Time</th>
+          <th scope="col">Hall</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <!--<tbody *ngFor="let performance of performances; index as i">-->
+        <tbody *ngFor="let perf of performances">
+        <tr>
+          <td><input class="form-control" type="datetime-local" value="{{perf.date}}" readonly></td>
+          <td>
+            <input class="form-control" type="text" value="{{perf.hall.name}}" readonly>
+          </td>
+          <td><button class="btn btn-primary" (click)="removePerformance(perf)">Remove</button></td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+          <td><input class="form-control" type="datetime-local" formControlName="datetime"></td>
+          <td>
+            <select class="form-control" id="hall" formControlName="hall">
+              <option *ngFor="let hall of halls" [ngValue]="hall">{{hall.name}}</option>
+            </select>
+          </td>
+          <td><input type="button" value="Add performance" (click)="addToPerfomances()"></td>
+        </tr>
+        <div *ngIf="performanceError != null" class="error">
+          <small class="form-text text-warning" *ngIf="performanceError">{{performanceError}}</small>
+        </div>        </tbody>
+      </table>
+    </app-input-box>
+  </form>
+
+</app-form-box>
+
+
+
+

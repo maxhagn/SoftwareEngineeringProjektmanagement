@@ -1,0 +1,20 @@
+<app-error-box [(error-message)]="errorMessage"></app-error-box>
+
+<app-content-header header-text="Buy your ticket"></app-content-header>
+
+<ng-container
+  [ngTemplateOutlet]="ticket ? ticketDetails : loadingIndicator"
+  [ngTemplateOutletContext]="{ loading:'Loading ticket details ...' }">
+</ng-container>
+
+<ng-template #ticketDetails>
+  <app-checkout-detail-view [ticket]="ticket">
+    <button type="button" class="btn btn-primary mt-4" (click)="buyTicket()">Confirm purchase</button>
+  </app-checkout-detail-view>
+</ng-template>
+
+<ng-template #loadingIndicator let-loading="loading">
+  <div class="loading-container mt-4">
+    <app-loading-indicator [text]="loading"></app-loading-indicator>
+  </div>
+</ng-template>

@@ -1,0 +1,135 @@
+<app-content-header header-text="Recent News">
+  <button *ngIf="authService.amAdmin()" class="btn btn-primary" [routerLink]="['/news/create']">
+    Create news entry
+  </button>
+</app-content-header>
+<h3 *ngIf="news === undefined || news.length < 1 " style="text-align:center"> {{message}} </h3>
+<div>
+  <div *ngIf="news">
+    <ng-container *ngFor="let item of news;let j = index">
+      <div class="row" *ngIf="j%3 === 0">
+
+        <div class="ct-blog col-sm-6 col-md-4 " *ngFor="let n of getNext3Entries(j,news)">
+          <div class="inner" [routerLink]="['/news', n.id]">
+            <div class="fauxcrop">
+              <img *ngIf="this.map" [src]=this.map.get(n.id) alt="picture">
+            </div>
+            <h3 class="ct-blog-header">{{n.title}}</h3>
+            <h6 class="ct-blog-header">Written by {{n.author}}</h6>
+            <div class="ct-blog-content">
+              <div class="ct-blog-date">
+                <span [innerText]="getMonth(n.date)"></span>
+                <strong [innerText]="getDay(n.date)"></strong>
+              </div>
+              <span class="ct-blog-content">{{n.summary}}</span>
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+      <p *ngIf="item!== undefined"></p>
+
+    </ng-container>
+  </div>
+
+  <div *ngIf="displayOld === true && noNew === true">
+    <div *ngFor="let item of readNews;let i = index">
+      <div class="row" *ngIf="i%3 === 0">
+
+        <div class="ct-blog col-sm-6 col-md-4" *ngFor="let n of getNext3Entries(i, readNews)">
+          <div class="inner" [routerLink]="['/news', n.id]">
+            <div class="fauxcrop">
+              <img *ngIf="this.map"
+                   [src]=this.map.get(n.id) alt="picture" class="w3-hover-opacity">
+
+              <div class="text-block">
+                <h2><span>Read</span></h2>
+              </div>
+            </div>
+            <h3 class="ct-blog-header">{{n.title}}</h3>
+            <h6 class="ct-blog-header">Written by {{n.author}}</h6>
+            <div class="ct-blog-content">
+              <div class="ct-blog-date">
+                <span [innerText]="getMonth(n.date)"></span>
+                <strong [innerText]="getDay(n.date)"></strong>
+              </div>
+              <span class="ct-blog-content">
+         {{n.summary}}</span>
+            </div>
+          </div>
+
+          <p></p>
+        </div>
+      </div>
+
+
+      <p></p>
+
+    </div>
+  </div>
+
+  <div *ngIf="displayOld === true && pageNum === page.totalPages - 1 &&!noNew">
+    <div *ngFor="let item of readNews;let i = index">
+      <div class="row" *ngIf="i%3 === 0">
+
+        <div class="ct-blog col-sm-6 col-md-4" *ngFor="let n of getNext3Entries(i, readNews)">
+          <div class="inner" [routerLink]="['/news', n.id]">
+            <div class="fauxcrop">
+              <img *ngIf="this.map"
+                   [src]=this.map.get(n.id) alt="picture" class="w3-hover-opacity">
+
+              <div class="text-block">
+                <h2><span>Read</span></h2>
+              </div>
+            </div>
+            <h3 class="ct-blog-header">{{n.title}}</h3>
+            <h6 class="ct-blog-header">Written by {{n.author}}</h6>
+            <div class="ct-blog-content">
+              <div class="ct-blog-date">
+                <span [innerText]="getMonth(n.date)"></span>
+                <strong [innerText]="getDay(n.date)"></strong>
+              </div>
+              <span class="ct-blog-content">
+         {{n.summary}}</span>
+            </div>
+          </div>
+
+          <p></p>
+        </div>
+      </div>
+
+
+      <p></p>
+
+    </div>
+  </div>
+
+  <div class="btn-news btn-contests" *ngIf="displayOld === false ">
+    <div class="footer" (click)="displayOldNews()"
+         *ngIf="footer  ===true && readNews !== undefined && readNews.length!== 0">VIEW READ NEWS
+    </div>
+  </div>
+
+</div>
+<div class="row" style="margin-top: 10px;">
+  <div class="col-4">
+    <nav aria-label="page navigation">
+      <ul class="pagination">
+        <ng-container *ngIf="!page.first">
+          <li class="page-item"><a class="page-link" (click)="previousPage();loadNewsPage();">Previous Page</a></li>
+        </ng-container>
+        <ng-container *ngIf="!page.last">
+          <li class="page-item"><a class="page-link" (click)="nextPage();loadNewsPage();">Next Page</a></li>
+        </ng-container>
+      </ul>
+    </nav>
+    <ng-container *ngIf="page && page.content.length">
+      <p style="color: #999">
+        Page {{pageNum+1}} / {{page.totalPages}}<br>
+        Entries {{page.content.length}} / {{page.totalElements}}
+      </p>
+    </ng-container>
+  </div>
+</div>

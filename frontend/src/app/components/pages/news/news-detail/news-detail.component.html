@@ -1,0 +1,64 @@
+<div class="row" *ngIf="news !==  undefined && retrievedImages!==  undefined">
+  <div class="leftcolumn">
+    <div class="card">
+      <h2>{{news.title}}</h2>
+      <h6>{{getMonth(news.date)}} {{getDay(news.date)}}, {{getYear(news.date)}}</h6>
+
+      <div class="row">
+        <ngb-carousel *ngIf="retrievedImages.length > 1" >
+          <ng-template ngbSlide *ngFor="let image of retrievedImages">
+            <div class="picsum-img-wrapper">
+              <img *ngIf="retrievedImages" [src]=image alt="picture" height="100%">
+            </div>
+          </ng-template>
+        </ngb-carousel>
+        <div *ngIf="retrievedImages.length ===1">
+          <div class="column" *ngFor="let image of retrievedImages">
+            <img *ngIf="retrievedImages" [src]=image alt="picture" height="100%">
+          </div>
+        </div>
+
+
+      </div>
+
+
+      <p>
+        {{news.text}}
+      </p>
+
+
+
+    </div>
+    <div class="footer">
+      <h2 routerLink="/home">GO TO NEWS</h2>
+    </div>
+
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>Written by</h2>
+      <p>{{news.author}}</p>
+    </div>
+    <p></p>
+    <div *ngIf=" newsEntries !== undefined && newsEntries.length !== 0">
+      <div *ngFor="let n of threeEntries" (click)="whenSelected(n.id)">
+        <h3 *ngIf="threeEntries.length !== 0">Newest news</h3>
+        <div class="card" *ngIf="threeEntries.length !== 0 || n !== undefined">
+          <div class="column">
+
+            <div>{{n.title}}</div>
+            <br>
+            <img *ngIf="map" [src]=this.map.get(n.id)><br>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <h3 *ngIf="threeEntries === undefined || newsEntries.length === 0">No new news</h3>
+
+
+  </div>
+</div>
+
+
+

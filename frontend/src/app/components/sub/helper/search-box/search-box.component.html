@@ -1,0 +1,13 @@
+<div class="row align-items-center">
+  <div class="col-auto">
+    <button type="button" class="btn btn-outline-secondary" (click)="onClick.emit()" data-toggle="collapse" data-target="#searchbox">{{ searchButtonText }}</button>
+  </div>
+</div>
+<div class="row collapse" id="searchbox">
+  <div class="col-12 d-flex flex-column">
+    <form class="form mt-4">
+      <ng-content></ng-content>
+    </form>
+    <button class="btn btn-success align-self-start" (click)="submit.emit()">Search</button>
+  </div>
+</div>

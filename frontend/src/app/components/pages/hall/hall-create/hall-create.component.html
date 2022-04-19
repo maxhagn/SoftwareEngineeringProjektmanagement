@@ -1,0 +1,78 @@
+<h3>Create hall</h3>
+<form>
+    <div class="form-group nomargin">
+      <div class="row">
+        <label class="label col-md-2" for="name">Name</label>
+        <input type="text" class="form-control col-md-4" id="name" placeholder="Name" name="hallName" disabled [(ngModel)]="this.name">
+      </div>
+    </div>
+  <div class="form-group nomargin">
+    <div class="row">
+    <label class="label col-md-2" for="rowInput">Rows</label>
+      <input type="number" class="form-control col-md-4" id="rowInput" name="rows" [(ngModel)]="this.rows" disabled placeholder="Row">
+    </div>
+  </div>
+    <div class="form-group nomargin">
+      <div class="row">
+      <label class="label col-md-2" for="columnInput">Columns</label>
+      <input type="number" class="form-control col-md-4" id="columnInput" name="cols" [(ngModel)]="this.cols" disabled placeholder="Column">
+
+      </div>
+    </div>
+
+</form>
+
+<div class="form-group">
+  <button class="btn btn-primary sameWidth" type="button" (click)="save()">Save</button>
+  <button class="btn btn-danger sameWidth" type="button" (click)="abort()">Abort</button>
+  <small class="form-text text-warning" *ngIf="errors.noscreen">You must have at least one screen</small>
+  <small class="form-text text-warning" *ngIf="errors.nosection">You must have at least one area</small>
+</div>
+
+<app-input-box label="Price Category">
+    <select class="form-control" [disabled]="adding" (change)="selectType()" [(ngModel)]="selectedCategory">
+      <option selected disabled hidden value="nothing">Select Price Category...</option>
+      <option *ngFor="let category of priceCategories">{{category.name}}</option>
+    </select>
+    <small class="form-text text-warning" *ngIf="errors.category">You must specify a category</small>
+</app-input-box>
+
+<app-input-box label="Name">
+    <input type="text" class="form-control" required [(ngModel)]="areaName" [disabled]="adding || selectedCategory==='nothing'" placeholder="Name">
+  <small class="form-text text-warning" *ngIf="errors.name">You must specify a name</small>
+</app-input-box>
+  <div class="form-group">
+    <button class="btn btn-outline-secondary sameWidth" type="button" (click)="addSection()">Add Section</button>
+    <button class="btn btn-outline-secondary sameWidth" type="button" (click)="addSeats()">Add Seats</button>
+    <button class="btn btn-outline-secondary sameWidth" type="button" (click)="addScreen()">Add Screen</button>
+  </div>
+
+  <div class="form-group sameWidth" *ngIf="deleting">
+    <div class="btn-group sameWidth">
+      <button class="btn btn-danger" (click)="deleteSelection()">Delete</button>
+      <button class="btn btn-warning" (click)="cancelSelection()">Cancel</button>
+    </div>
+  </div>
+  <div *ngIf="!deleting" class="form-group">
+    <input type="submit" class="btn btn-warning" value="Delete" (click)="startDeleting()">
+  </div>
+
+<div class="hall-create-plan" (mouseup)="addArea()" [ngStyle]="{gridTemplateRows: 'repeat('+rows+','+size+'rem', gridTemplateColumns: 'repeat('+cols+','+size+'rem'}">
+  <ng-container *ngFor="let item of items">
+    <div *ngIf="item.isDefaultItem()" [ngStyle]="{gridArea:item.area, backgroundColor:item.tmpColor || item.color, border:item.border}" (mousedown)="setStartPos(item.area.colStart, item.area.rowStart)" (mouseenter)="setEndPos(item.area.colStart, item.area.rowStart)" (dragstart)="returnFalse()" class="hall-create-item">
+      {{item.name}}
+    </div>
+    <div *ngIf="item.isSector()" [ngStyle]="{gridArea:item.area, backgroundColor:item.tmpColor || item.color, border:item.border}" (click)="editItem(item)" (dragstart)="returnFalse()" class="hall-create-item">
+      {{item.name}}
+    </div>
+    <div *ngIf="item.isSeat()" [ngStyle]="{gridArea:item.area, backgroundColor:item.tmpColor || item.color, border:item.border}" (dragstart)="returnFalse()" class="hall-create-item">
+      {{item.name}}
+    </div>
+    <div *ngIf="item.isSeatSection()" [ngStyle]="{gridArea:item.area, backgroundColor: item.color, border:item.border}" (click)="editItem(item)" (dragstart)="returnFalse()" class="hall-create-item">
+      <span>{{item.name}}</span>
+    </div>
+    <div *ngIf="item.isScreen()" [ngStyle]="{gridArea:item.area, border:item.border}" (click)="editItem(item)" (dragstart)="returnFalse()" class="hall-create-item screen">
+      Screen
+    </div>
+  </ng-container>
+</div>

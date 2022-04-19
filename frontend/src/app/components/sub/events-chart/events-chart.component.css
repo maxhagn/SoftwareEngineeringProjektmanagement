@@ -1,0 +1,22 @@
+
+table {
+  border-collapse: collapse;
+}
+
+
+
+th {
+  padding: 1em;
+  font-size: 1em;
+}
+
+td {
+  padding: 1em;
+  border: 1px solid black;
+}
+
+button{
+  margin: 1em 1em 1em 0em;
+  padding: 1em;
+  font-size: inherit;
+}

@@ -1,0 +1,36 @@
+<div class="list-group-item py-4" style="margin-top: 10px;" [ngStyle]="{'background-color': ( entry.status==='REFUNDED' ) ? 'lightgrey' : 'white'}">
+  <div class="row align-items-stretch" style="height: 100%">
+    <div class="col-5 d-flex flex-column justify-content-center text-center" style="border-right: 2px solid #efefef">
+      <h5>Ticket for: {{entry.performance.event.title}}</h5>
+      <div>
+        <p>
+          Hall is: {{entry.performance.hall.name}}<br>
+          Start time:  {{entry.performance.datetime | date : 'dd.MM.yyyy hh:mm'}}<br>
+          Type: {{entry.status | lowercase}}
+        </p>
+      </div>
+    </div>
+    <div class="col-5 d-flex flex-column justify-content-between text-center" style="border-right: 2px solid #efefef">
+      <p *ngIf="seatsTypeSeats.length>0"><b>Your seats</b></p>
+      <ul *ngIf="seatsTypeSeats.length > 0" style="list-style: none;height: 100%; padding-top: 20px; padding-left: 0">
+        <li *ngFor="let seat of seatsTypeSeats"><b>Area: {{seat.area.name}};</b> Row {{seat.seatRow}}; Seat {{seat.seatCol}}; {{seat.area.priceCategory.price}} €</li>
+      </ul>
+      <!--<p *ngIf="seatsTypeOther.size > 0"><b></b></p>-->
+      <div *ngIf="seatsTypeOther.size > 0">
+        <div *ngFor="let sectionname of getKeys()">
+          <p><b>You have {{getValues(sectionname).length}} seats inside area {{sectionname}}</b> ({{getPrice(sectionname)}}€ each)</p>
+          <!--<p *ngFor="let singleseat of getValues(sectionname)">Row {{singleseat.seatRow}}; Seat {{singleseat.seatCol}}; {{singleseat.area.priceCategory.price}}</p>-->
+          <!--<p>{{concatSeatString(getValues(sectionname))}}</p>-->
+        </div>
+      </div>
+    </div>
+    <div class="col-2 align-self-center text-center">
+      <button type="submit" [routerLink]="['/ticket', entry.id]" class="btn btn-primary">Ticket details</button>
+    </div>
+  </div>
+  <ng-container>
+    <div class="row justify-content-center" style="margin-top: 20px;" *ngIf="entry.status==='REFUNDED'">
+      <b>This Ticket was refunded!</b>
+    </div>
+  </ng-container>
+</div>

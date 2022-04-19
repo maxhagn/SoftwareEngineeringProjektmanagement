@@ -1,0 +1,37 @@
+<app-content-header header-text="Location"></app-content-header>
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error! </strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row content" *ngIf="!error && location_with_events">
+  <div class="col-9 info">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{location_with_events.name}}</h2>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text"><b>Location Details</b><br>
+          {{location_with_events.street}} <br> {{location_with_events.city}}, {{location_with_events.area_code}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Performances</b><br>
+        </div>
+
+        <div class="row">
+          <ng-container *ngFor="let entry of location_with_events.events">
+            <app-events-entry [entry]="entry" [routerLink]="['/event', entry.id]"></app-events-entry>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

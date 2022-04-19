@@ -1,0 +1,15 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<app-form-box (on-submit)="submit()"  form-title="Reset Password">
+  <app-input-box label="Password">
+    <input type="password" class="form-control" [(ngModel)]="pw">
+  </app-input-box>
+  <app-input-box label="Repeat Password">
+    <input type="password" class="form-control" [(ngModel)]="pwRepeat">
+  </app-input-box>
+  <div class="form-text text-warning" *ngIf="errors.length">
+    The password must be at least 8 characters long
+  </div>
+  <div class="form-text text-warning" *ngIf="errors.ident">
+    The passwords must be ident
+  </div>
+</app-form-box>

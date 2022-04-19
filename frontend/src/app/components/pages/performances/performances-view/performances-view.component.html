@@ -1,0 +1,17 @@
+<table class="table mt-2">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Start-Time</th>
+      <th scope="col">End-Time</th>
+      <th scope="col">Hall</th>
+      <th *ngIf="buyable" scope="col">Tickets</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr [buyable]="buyable" app-performances-entry></tr>
+      <tr [buyable]="buyable"  app-performances-entry></tr>
+      <tr [buyable]="buyable"  app-performances-entry></tr>
+      <tr *ngIf="appendCreate" app-performances-create-entry></tr>
+  </tbody>
+</table>

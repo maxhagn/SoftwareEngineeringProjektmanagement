@@ -1,0 +1,18 @@
+<div class="jumbotron mt-5">
+  <h1 class="display-4">Welcome to Ticketline!</h1>
+  <span class=""><span class="quote">„</span>The Website for all your Ticket needs<span class="quote">“</span></span>
+  <hr class="my-4">
+  <p *ngIf="!authService.isSignedIn()">
+    <span class="alert-warning p-3 rounded">Please Login or Register to continue using this Application</span><br/><br/>
+    <span class="btn-group">
+      <button class="btn btn-primary btn-lg px-5" routerLink="/login" role="button">Login</button>
+     <button class="btn btn-secondary btn-lg px-5" routerLink="/sign_up" role="button">Register</button>
+    </span>
+  </p>
+  <div *ngIf="authService.isSignedIn()">
+    <p>Check out the latest news.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" routerLink="/home" role="button">News</a>
+    </p>
+  </div>
+</div>

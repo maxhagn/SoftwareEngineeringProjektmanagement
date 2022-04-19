@@ -1,0 +1,54 @@
+<!--<div *ngIf="error" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Authentication problems!</strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div> -->
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<app-form-box form-title="Sign up" back-link="/" (on-submit)="onSubmit(signupForm.value)">
+<form [formGroup]="signupForm" class="form">
+  <app-input-box label="Name" label-for="inputName">
+    <input type="text" name="name" formControlName="name" class="form-control" id="inputName" aria-describedby="nameHelp"
+           placeholder="Enter name">
+    <div *ngIf="submitted && signupForm.controls.name.errors" class="error">
+      <small class="form-text text-warning" *ngIf="signupForm.controls.name.errors.required">Your name is required!</small>
+    </div>
+  </app-input-box>
+  <app-input-box label="Surname">
+    <input type="text" name="surname" formControlName="surname"class="form-control" id="inputSurname" aria-describedby="nameHelp"
+           placeholder="Enter surname">
+    <div *ngIf="submitted && signupForm.controls.surname.errors" class="error">
+      <small class="form-text text-warning" *ngIf="signupForm.controls.surname.errors.required">Your surname is required!</small>
+    </div>
+  </app-input-box>
+  <app-input-box label="Email">
+    <input type="text" name="email" formControlName="email" class="form-control" id="inputEmail" aria-describedby="nameHelp"
+           placeholder="Enter email">
+    <div *ngIf="submitted && signupForm.controls.email.errors" class="error">
+      <small class="form-text text-warning" *ngIf="signupForm.controls.email.errors.required">Your email is required!</small>
+      <small class="form-text text-warning" *ngIf="signupForm.controls.email.errors.email">Please provide a valid email!</small>
+    </div>
+  </app-input-box>
+  <app-input-box label="Password">
+    <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder="Enter Password">
+    <div *ngIf="submitted && signupForm.controls.password.errors" class="error">
+      <small class="form-text text-warning" *ngIf="signupForm.controls.password.errors.required">Your password is required!</small>
+      <small class="form-text text-warning" *ngIf="signupForm.controls.password.errors.minlength">Your password must be at least 8 characters long!</small>
+    </div>
+  </app-input-box>
+  <app-input-box label="Repeat Password">
+    <input type="password" name="repeatpassword" formControlName="repeatpassword" class="form-control" id="repeatPassword" placeholder="Repeat Password">
+    <div *ngIf="submitted && signupForm.controls.repeatpassword.errors" class="error">
+      <small class="form-text text-warning" *ngIf="signupForm.controls.repeatpassword.errors.required">Your password is required!</small>
+      <small class="form-text text-warning" *ngIf="signupForm.controls.repeatpassword.errors.minlength">Passwords must match!</small>
+    </div>
+  </app-input-box>
+<!--
+  <app-input-box label="Remember me">
+    <input type="checkbox" checked="checked" name="remember" class="ml-3">
+  </app-input-box>
+  -->
+  <p *ngIf="!submitted" style="margin-top: -10px">By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms &
+    Privacy</a>.</p>
+</form>
+</app-form-box>

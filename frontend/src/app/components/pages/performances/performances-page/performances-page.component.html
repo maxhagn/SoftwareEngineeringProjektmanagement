@@ -1,0 +1,89 @@
+<app-content-header header-text="Performances"></app-content-header>
+
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error! </strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+<div class="row">
+  <div class="col-12">
+    <app-input-box label="Suche">
+      <input type="text" maxlength="255" name="search_mixed" [disabled]="extendedSearchFlag" [(ngModel)]="performanceQuery.mixedQuery" (keyup)="loadPerformances();" id="search_mixed" class="form-control" placeholder="Enter Query">
+    </app-input-box>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-auto">
+        <button type="button" class="btn btn-outline-secondary" (click)="setSearchLevel();" data-toggle="collapse" data-target="#searchbox">{{extendedSearchButtonText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse" style="margin-bottom: 50px;" id="searchbox">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-6">
+        <app-input-box label="Date/Time ( +/- 3 Days )">
+          <input type="datetime-local" [(ngModel)]="performanceQuery.dateTime" (change)="loadPerformances();" name="datetime"  id="datetime" class="form-control">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Price ( +/- 10 € )">
+          <input type="number" name="price" min="0" max="10000" [(ngModel)]="performanceQuery.price"  (keyup)="loadPerformances();" (change)="loadPerformances();" id="price" class="form-control" placeholder="Enter price">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Event Title">
+          <input type="text" name="event" [(ngModel)]="performanceQuery.eventTitle" (keyup)="loadPerformances();" id="event" class="form-control" placeholder="Enter event">
+        </app-input-box>
+      </div>
+      <div class="col-6">
+        <app-input-box label="Hall Name">
+          <input type="text" name="hall" [(ngModel)]="performanceQuery.hallName" (keyup)="loadPerformances();" id="hall" class="form-control" placeholder="Enter hall">
+        </app-input-box>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 50px;">
+  <ng-container *ngFor="let entry of page.content">
+    <app-performances-page-entry [entry]="entry" [routerLink]="['/select_seats/', entry.id]"></app-performances-page-entry>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="!page.content.length">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4">
+      <p>There are no Performances matching your criteria!</p>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" style="margin-top: 10px;">
+  <div class="col-4">
+    <nav aria-label="page navigation">
+      <ul class="pagination">
+        <ng-container *ngIf="!page.first">
+          <li class="page-item"><a class="page-link" (click)="previousPage();loadPerformances();">Previous Page</a></li>
+        </ng-container>
+        <ng-container *ngIf="!page.last">
+          <li class="page-item"><a class="page-link" (click)="nextPage();loadPerformances();">Next Page</a></li>
+        </ng-container>
+      </ul>
+    </nav>
+    <ng-container *ngIf="page.content.length">
+      <p style="color: #999">
+        Page {{performanceQuery.page+1}} / {{page.totalPages}}<br>
+        Entries {{page.content.length}} / {{page.totalElements}}
+      </p>
+    </ng-container>
+  </div>
+</div>

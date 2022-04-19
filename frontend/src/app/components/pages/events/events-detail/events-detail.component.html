@@ -1,0 +1,64 @@
+<app-content-header header-text="Event Details"></app-content-header>
+<app-error-box [error-message]="errorMessage"></app-error-box>
+
+<div class="row content">
+  <!--
+  <div class="col-3 side-nav">
+
+    <img src="/assets/{{event.link}}.jpg" class="img-thumbnail rounded" alt="Max Giesinger">
+
+  </div>
+-->
+  <div class="col-9 info" *ngIf="event">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{event.title}}</h2>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text"><b>Duration</b><br>
+          {{event.duration}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text"><b>Description</b><br>
+          {{event.description}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Artist</b><br>
+          {{event.artist}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Aufführungen</b><br>
+        </div>
+
+        <div class="row">
+          <table class="table mt-2">
+            <thead>
+            <th scope="col">Date and Time</th>
+            <th scope="col">Hall</th>
+            <th scope="col">Buy a Ticket!</th>
+            </thead>
+            <tbody *ngFor="let performance of event.performances">
+            <td class="align-middle">{{performance.date.toLocaleString().split('T')[0] + ' ' + (performance.date.toLocaleString().split('T')[1].split('.')[0].substr(0, 5))}}</td>
+            <td class="align-middle">{{performance.hall.name}}</td>
+            <td class="align-middle"><input type="button" class="btn-primary form-control" value="Tickets"
+                                            (click)="ticket(performance.id)"></td>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

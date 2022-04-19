@@ -1,0 +1,16 @@
+<app-header></app-header>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
+
+<div class="message-overlay">
+  <div [class.show-message]="showMessage" class="message-container">
+    <div class="message-text">{{ pushMessage }}</div>
+    <button style="justify-self: flex-end" type="button" (click)="vanishMessage()" class="close" data-dismiss="alert" aria-label="Close">
+      <span style="color: white" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+<app-footer></app-footer>

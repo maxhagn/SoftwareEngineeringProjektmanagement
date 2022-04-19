@@ -1,0 +1,29 @@
+img{
+  margin-top: 10px;
+}
+.divtext {
+  border: solid 0.2px;
+  color: lightgrey;
+  max-width: 48.9em;
+  min-height: 5em;
+  overflow: auto;
+}
+.animated {
+  -webkit-transition: height 0.2s;
+  -moz-transition: height 0.2s;
+  transition: height 0.2s;
+}
+
+.form-control{
+  overflow: auto;
+}
+
+.centered {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.centered > .input-group + .input-group {
+  margin-top: .5rem;
+}

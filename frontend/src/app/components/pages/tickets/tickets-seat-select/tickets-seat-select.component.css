@@ -1,0 +1,8 @@
+p {
+  margin-bottom: 0;
+}
+
+.seats {
+  max-height: 10rem;
+  overflow-y: scroll;
+}

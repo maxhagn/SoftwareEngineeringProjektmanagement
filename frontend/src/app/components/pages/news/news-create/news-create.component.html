@@ -1,0 +1,83 @@
+<app-error-box [error-message]="errorMessage" *ngIf="errorMessage">
+  <div *ngIf="error === true" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error! </strong> {{ errorMessage}}
+  </div>
+</app-error-box>
+
+<app-info-box [info-message]="successAlertMessage"></app-info-box>
+<app-form-box form-title="Create news entry" (on-submit)="onSubmit(createForm.value)" back-link="/home">
+  <form [formGroup]="createForm" class="form">
+    <app-input-box label="Titel*" label-for="titleId" >
+      <input type="text" name="title" id="titelId" formControlName="title"
+             class="form-control" aria-describedby="titleHelp" placeholder="Enter titel">
+      <div *ngIf="submitted && createForm.controls.title.errors" class="error">
+        <small class="form-text text-warning" *ngIf="createForm.controls.title.errors.required">Your surname is required!</small>
+      </div>
+    </app-input-box>
+<app-input-box label="Name of author*" label-for="authorId">
+      <input type="text" name="author" id="authorId" formControlName="author" class="form-control"
+             placeholder="Enter name" aria-describedby="authorHelp">
+      <div *ngIf="submitted && createForm.controls.author.errors" class="error">
+        <small class="form-text text-warning" *ngIf="createForm.controls.author.errors.required">A author is required!</small>
+      </div>
+    </app-input-box>
+
+    <app-input-box label="Event*"  label-for="eventId">
+      <select name="event" formControlName="event" class="form-control" id="eventId"
+              aria-describedby="eventHelp">
+        <option *ngFor="let event of events" [ngValue]="event">{{event.title}}</option>
+      </select>
+      <div *ngIf="submitted && createForm.controls.event.errors" class="error">
+        <small class="form-text text-warning" *ngIf="createForm.controls.event.errors.required">A event
+          is
+          required!
+        </small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Date*"  label-for="newsDateId">
+      <input type="date" name="newsDate" id="newsDateId" formControlName="date"
+             class="form-control" placeholder="Enter date" aria-describedby="dateHelp">
+      <div *ngIf="submitted && createForm.controls.date.errors" class="error">
+        <small class="form-text text-warning" *ngIf="createForm.controls.date.errors.required">A date is required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Picture*"  label-for="pictureId">
+      <div class="centered">
+        <div class="input-group" *ngFor="let picture of pictureName; index as i">
+          <div class="custom-file">
+            <input *ngIf="reset=== false"  type="file" accept="image/*" class="custom-file-input" id="file" (change)="whenPictureChanged($event, i)">
+            <input *ngIf="reset=== true"   type="file" accept="image/*" class="custom-file-input" id="resetFile" (change)="whenPictureChanged($event, i)">
+
+            <label class="custom-file-label" for="file" *ngIf="pictureName[i] &&reset=== false"> {{pictureName[i]}}</label>
+            <label class="custom-file-label" for="resetFile" *ngIf="pictureName[i] &&reset=== true"> {{pictureName[i]}}</label>
+          </div>
+        </div>
+
+        <div *ngIf="imgURL!== undefined">
+          <img [src]="imgURL" height="200" >
+        </div>
+      </div>
+      <div *ngIf="submitted && ''+ pictureName==='Choose Picture'" class="error">
+        <small class="form-text text-warning" *ngIf="''+ pictureName==='Choose Picture'">At least one picture is required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Text*"  label-for="textId">
+      <div class="form-group">
+
+        <textarea formControlName="text" class="form-control" id="textId"  aria-describedby="textHelp"
+                  placeholder="Enter text" contenteditable="true"></textarea>
+        <div *ngIf="submitted && createForm.controls.text.errors" class="error">
+          <small class="form-text text-warning" *ngIf="createForm.controls.text.errors.required">A text is required!</small>
+        </div>
+        <p></p>
+      </div>
+    </app-input-box>
+  </form>
+</app-form-box>
+
+
+
+
+
+
+

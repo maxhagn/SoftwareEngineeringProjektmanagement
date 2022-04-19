@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Title</title>
+    <style type="text/css">
+        .floatLeft{
+            float:left;
+        }
+        .right{
+            margin-left: 420px;
+        }
+        .bold{
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+        }
+        th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-weight: bold;
+            text-align: left;
+        }
+        table{
+            border-collapse: collapse;
+        }
+        table thead tr th{
+            border-bottom: 1px solid #9c9c9c;
+        }
+        .footer {
+            margin-top: 60px;
+            font-weight: lighter;
+            color: #9c9c9c;
+        }
+        .items {
+            height: 350px;
+        }
+        tr {
+            vertical-align: top;
+            height: fit-content;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rechnung</h1>
+    <div>
+        Firma <br/>
+        Muster Branche GmbH<br/>
+        Max Musterman<br/>
+        Musterstraße 34<br/>
+        4567 Musterdorf
+    </div>
+    <div class="right bold">
+        Rechnungsdatum: %nowDate%<br/>
+        Liefer- bzw. Leistungsdatum: %performanceDate%<br/>
+        Ust-IdNr.: 12345678<br/>
+    </div>
+    <div>
+        <br/>
+        <h3>Rechnungs Nr.: %invoiceNr%</h3>
+        <br/>
+        <p>Sehr Geehrte Damen und Herren</p>
+        <br/>
+        <p>
+            Wir bedanken uns für Ihren Einkauf und stellen Ihnen hiermit für folgende Leistungen die Rechnung zur Verfügung:
+        </p>
+        <br/>
+        <table class="items">
+            <thead>
+            <tr>
+                <th>Beschreibung</th>
+                <th>Menge</th>
+                <th>Preis</th>
+                <th>Netto</th>
+            </tr>
+            </thead>
+            <tbody>
+            %rows%
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td>Nettobetrag:</td>
+                <td>%nettoSumme%</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td>Ust. 20%:</td>
+                <td>%ust%</td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td> </td>
+                <td>Rechnungssumme:</td>
+                <td>%bruttoSumme%</td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="footer">
+        <table>
+            <thead>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mustermann GmbH</td>
+                    <td>Tel.: 0123456789</td>
+                    <td>Musterbank Musterstadt</td>
+                </tr>
+                <tr>
+                    <td>Musterstraße 1</td>
+                    <td>E-Mail:</td>
+                    <td>BLZ: 43527</td>
+                </tr>
+                <tr>
+                    <td>0123 Musterstadt</td>
+                    <td>max.mustermann@gmail.com</td>
+                    <td>IBAN: AT283712893712873213</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>Web: www.maxmusterman.com</td>
+                    <td>BIC: SDMANDJSA13123</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <table>
+    </table>
+
+</body>
+</html>

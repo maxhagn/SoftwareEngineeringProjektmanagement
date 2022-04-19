@@ -1,0 +1,69 @@
+<app-error-box [(error-message)]="errorMessage"></app-error-box>
+
+<app-content-header header-text="Select your seats"></app-content-header>
+
+<div class="row mb-4">
+  <div class="col-auto">
+    <h5 class="warning">
+      Your ticket is valid 15 minutes from now on and will be deleted afterwards unless you buy or reserve it.
+    </h5>
+  </div>
+</div>
+
+<ng-container
+  [ngTemplateOutlet]="performance && selectedSeats ? performanceDetail : loadingIndicator"
+  [ngTemplateOutletContext]="{ loading:'Loading performance details ...' }">
+</ng-container>
+
+<ng-container
+  [ngTemplateOutlet]="hall && takenSeats && selectedSeats ? hallView : loadingIndicator"
+  [ngTemplateOutletContext]="{ loading:'Loading seat-plan ...' }">
+</ng-container>
+
+
+<div class="row justify-content-end mt-4 action-container">
+  <div class="col-auto">
+    <button *ngIf="ticket" class="btn btn-primary" [routerLink]="['/reserve', ticket.id]">Continue to reservation</button>
+  </div>
+  <div class="col-auto">
+    <button *ngIf="ticket" class="btn btn-primary" [routerLink]="['/buy', ticket.id]">Continue to checkout</button>
+  </div>
+</div>
+
+<ng-template #hallView>
+  <div *ngIf="ticket" class="row hall-view-container mt-4">
+    <div class="col-12">
+      <app-hall-view [performance]="performance" (onSeatSelect)="selectSeat($event)" (onSeatUnselect)="unselectSeat($event)" [selectedSeats]="selectedSeats" [takenSeats]="takenSeats" [hall]="hall"></app-hall-view>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #performanceDetail>
+  <div class="list-group-item">
+    <div class="row align-items-center text-center">
+      <div class="col-6 justify-content-center" style="border-right: 1px solid black">
+        <h5>Seat Select for: {{ performance.title }}</h5>
+        <div>
+          <p class="mb-1">Location: {{ performance.locationName }}, Hall: {{ performance.hallName }}</p>
+          <p>Start time: {{ performance.date | date : 'mediumDate' }} at {{ performance.date | date : 'H:mm' }}</p>
+        </div>
+      </div>
+
+      <div class="col-6 justify-content-center text-center" *ngIf="selectedSeats.length > 0">
+        <h5>Your selected seats are:</h5>
+        <div class="flex flex-column seats">
+          <div class="mb-1" *ngFor="let seatText of getSelectedSeatText(selectedSeats)">{{ seatText }}</div>
+        </div>
+      </div>
+      <div class="col-6 justify-content-center text-center" *ngIf="selectedSeats.length <= 0">
+        <p>No seats selected</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadingIndicator let-loading="loading">
+  <div class="loading-container mt-4">
+    <app-loading-indicator [text]="loading"></app-loading-indicator>
+  </div>
+</ng-template>

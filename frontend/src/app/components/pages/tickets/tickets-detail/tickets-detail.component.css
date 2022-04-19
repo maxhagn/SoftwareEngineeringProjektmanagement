@@ -1,0 +1,43 @@
+.action-button {
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+h3 {
+  color: #000000;
+}
+
+.info-text {
+  font-size: 1.2rem;
+}
+
+.action-text {
+  margin-top: 1rem;
+}
+
+.action-text-content {
+  text-align: center;
+  color: #9d9d9d;
+  font-size: 0.9rem;
+}
+
+.info-item {
+  margin-top: 0.8rem;
+}
+
+.content {
+  margin-top: 2rem;
+}
+
+.action-buttons {
+  border-right: solid #E9E9E9 2px;
+  padding-right: 2rem;
+}
+
+.info {
+  padding-left: 2rem;
+}

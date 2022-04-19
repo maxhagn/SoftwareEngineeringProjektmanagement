@@ -1,0 +1,106 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+
+<app-form-box (on-submit)="submit()" form-title="Create location" back-link="/locations">
+  <app-input-box label="Name">
+    <input type="text" class="form-control" id="name-id" placeholder="Enter name" [(ngModel)]="location.name">
+    <small class="form-text text-warning" *ngIf="locErrors.name">You must enter a name</small>
+  </app-input-box>
+  <app-input-box label="Street">
+    <input type="text" class="form-control" id="street-id" placeholder="Enter street" [(ngModel)]="location.street">
+    <small class="form-text text-warning" *ngIf="locErrors.street">You must enter a street</small>
+  </app-input-box>
+  <app-input-box label="City">
+    <input type="text" class="form-control" id="city-id" placeholder="Enter city" [(ngModel)]="location.city">
+    <small class="form-text text-warning" *ngIf="locErrors.city">You must enter a city</small>
+  </app-input-box>
+  <app-input-box label="Country">
+    <input type="text" class="form-control" id="country-id" placeholder="Enter country" [(ngModel)]="location.country">
+    <small class="form-text text-warning" *ngIf="locErrors.country">You must enter a country</small>
+  </app-input-box>
+  <app-input-box label="Area Code">
+    <input type="text" class="form-control" id="area-id" placeholder="Enter area code" [(ngModel)]="location.area_code">
+    <small class="form-text text-warning" *ngIf="locErrors.code">You must enter an area code</small>
+  </app-input-box>
+  <app-input-box style="font-weight: bold" label="Price Categories:">
+    <table class="noboldTable table mt-2">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+    <tbody>
+      <tr *ngFor="let category of location.categories; let i = index">
+        <td>
+          {{category.name}}
+        </td>
+        <td>
+          {{category.price}}
+        </td>
+        <td><button class="btn btn-primary" [disabled]="categoryInUse(category)" data-toggle="tooltip" title="You cant delete categories in use" (click)="removeCategory(i)">Remove</button></td>
+      </tr>
+      <tr>
+        <td>
+            <input type="text" class="form-control" id="cat-name" [(ngModel)]="catName" placeholder="Enter Category Name">
+        </td>
+        <td>
+          <input type="number" class="form-control" id="cat-price" [(ngModel)]="catPrice">
+        </td>
+        <td>
+          <button class="btn btn-outline-secondary" (click)="addCategory()" type="button">Add Category</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+    <small class="form-text text-warning" *ngIf="catErrors.name">You must enter a name</small>
+    <small class="form-text text-warning" *ngIf="catErrors.price">You must enter a price greater than 0</small>
+    <small class="form-text text-warning" *ngIf="locErrors.cat">You must enter at least one category</small>
+  </app-input-box>
+  <app-input-box style="font-weight: bold" label="Halls:">
+    <table class="noboldTable table mt-2">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Rows</th>
+        <th>Cols</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let hall of location.halls; let i = index">
+        <td>
+          {{hall.name}}
+        </td>
+        <td>
+          {{hall.rows}}
+        </td>
+        <td>
+          {{hall.cols}}
+        </td>
+        <td><button class="btn btn-primary" (click)="removeHall(i)">Remove</button></td>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" class="form-control" id="hall-name" [(ngModel)]="hallName" placeholder="Enter Hall Name">
+        </td>
+        <td>
+          <input type="number" class="form-control" id="hall-rows" [(ngModel)]="hallRows">
+        </td>
+        <td>
+          <input type="number" class="form-control" id="hall-cols" [(ngModel)]="hallCols">
+        </td>
+        <td>
+          <button class="btn btn-outline-secondary" (click)="addHall()" type="button">Add</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <small class="form-text text-warning" *ngIf="hallErrors.name">You must enter a name</small>
+    <small class="form-text text-warning" *ngIf="hallErrors.rows">You must have at least 1 row</small>
+    <small class="form-text text-warning" *ngIf="hallErrors.cols">You must have at least 1 col</small>
+    <small class="form-text text-warning" *ngIf="hallErrors.cat">You must create at least one price category before creating an hall</small>
+    <small class="form-text text-warning" *ngIf="locErrors.halls">You must create at least one hall</small>
+  </app-input-box>
+
+</app-form-box>

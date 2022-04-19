@@ -1,0 +1,53 @@
+<app-content-header header-text="Artists"></app-content-header>
+
+<div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Error! </strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <app-input-box label="Search for Artists">
+      <input type="text" maxlength="255" minlength="0" name="search_mixed" [(ngModel)]="artistQuery.query" (keyup)="loadArtists();" id="search_mixed" class="form-control" placeholder="Enter Firstname or Surname">
+    </app-input-box>
+  </div>
+</div>
+
+<div class="row">
+  <ng-container *ngFor="let entry of page.content">
+    <app-artists-entry [entry]="entry" [routerLink]="['/artist', entry.id]"></app-artists-entry>
+  </ng-container>
+</div>
+
+<ng-container *ngIf="!page.content.length">
+  <div class="row" style="margin-top: 10px;">
+    <div class="col-4">
+      <p>There are no Artists matching your criteria!</p>
+    </div>
+  </div>
+</ng-container>
+
+<div class="row" style="margin-top: 10px;">
+  <div class="col-4">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <ng-container *ngIf="!page.first">
+          <li class="page-item"><a class="page-link" (click)="previousPage();loadArtists();">Previous Page</a></li>
+        </ng-container>
+        <ng-container *ngIf="!page.last">
+          <li class="page-item"><a class="page-link" (click)="nextPage();loadArtists();">Next Page</a></li>
+        </ng-container>
+      </ul>
+    </nav>
+    <ng-container *ngIf="page.content.length">
+      <p style="color: #999">
+        Page {{artistQuery.page+1}} / {{page.totalPages}}<br>
+        {{page.content.length}} / {{page.totalElements}} Entries
+      </p>
+    </ng-container>
+  </div>
+</div>
+
+

@@ -1,0 +1,12 @@
+<div class="card shadow-sm h-100">
+  <div class="card-body">
+    <div class="label"><b>Name</b></div>
+    <div class="text-content">{{entry.event.title}}</div>
+    <div class="label mt-2"><b>Date/Time</b></div>
+    <div class="text-content">{{entry.datetime | date : 'dd.MM.yyyy hh:mm' }}</div>
+    <div class="label mt-2"><b>Hall</b></div>
+    <div class="text-content">{{entry.hall.name}}</div>
+    <div class="label mt-2"><b>Price</b></div>
+    <div class="text-content">{{entry.min_price}}</div>
+  </div>
+</div>

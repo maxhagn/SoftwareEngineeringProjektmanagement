@@ -1,0 +1,8 @@
+.min > input{
+  display: inline;
+}
+
+.min::after{
+  content: "min";
+  margin-left: -70px;
+}

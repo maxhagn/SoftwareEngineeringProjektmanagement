@@ -1,0 +1,19 @@
+<div class="row entry align-items-center rounded mb-3">
+  <div class="col-5">
+    <div class="row">
+      <div class="col-12"><b class="lable">Name:</b></div>
+    </div>
+    <div class="row">
+      <div class="col-12 name">{{ user.firstname }} {{ user.surname }}</div>
+    </div>
+  </div>
+  <div class="col-2 offset-3" *ngIf="user.reset">
+    <p> Passwort reset link has been sent! </p>
+  </div>
+  <div class="col-2 offset-3">
+    <button class="btn btn-primary" (click)="resetEvent.emit()">Reset password</button>
+  </div>
+  <div class="col-2">
+    <button class="btn btn-danger" (click)="lockEvent.emit()">{{ user.locked ? "Unlock" : "Lock" }} user</button>
+  </div>
+</div>

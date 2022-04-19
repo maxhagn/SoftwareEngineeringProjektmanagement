@@ -1,0 +1,24 @@
+<app-error-box [(error-message)]="errorMessage"></app-error-box>
+
+<app-content-header header-text="Reserve your ticket"></app-content-header>
+
+<ng-container
+  [ngTemplateOutlet]="ticket ? ticketDetails : loadingIndicator"
+  [ngTemplateOutletContext]="{ loading:'Loading ticket details ...' }">
+</ng-container>
+
+<ng-template #ticketDetails>
+  <app-checkout-detail-view [ticket]="ticket">
+    <h5 class="warning mt-4 mb-4">
+      You must pick up your tickets at the counter at least 30 minutes before your play! <br>
+      <span style="font-size: 0.9rem" class="d-inline-block pt-2">After confirmung your reservation you will be redirected to your ticket where you can view your reservation.</span>
+    </h5>
+    <button type="button" class="btn btn-primary" (click)="reserveTicket()">Confirm reservation</button>
+  </app-checkout-detail-view>
+</ng-template>
+
+<ng-template #loadingIndicator let-loading="loading">
+  <div class="loading-container mt-4">
+    <app-loading-indicator [text]="loading"></app-loading-indicator>
+  </div>
+</ng-template>

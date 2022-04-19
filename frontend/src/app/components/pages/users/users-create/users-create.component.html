@@ -1,0 +1,56 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<app-info-box [info-message]="infoMessage"></app-info-box>
+
+<app-form-box form-title="Create user" back-link="/users" (on-submit)="onSubmit(signupForm.value)">
+  <form [formGroup]="signupForm" class="form">
+    <app-input-box label="Firstname">
+      <input type="text" name="firstname" formControlName="firstname" id="firstname-id" class="form-control"
+             placeholder="Enter Firstname">
+      <div *ngIf="submitted && signupForm.controls.firstname.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signupForm.controls.firstname.errors.required">Firstname is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Surname">
+      <input type="text" name="surname" formControlName="surname" id="surname-id" class="form-control"
+             placeholder="Enter Surname">
+      <div *ngIf="submitted && signupForm.controls.surname.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signupForm.controls.surname.errors.required">Surname is
+          required!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="E-Mail">
+      <input type="email" name="email" formControlName="email" id="email-id" class="form-control"
+             placeholder="Enter E-Mail">
+      <div *ngIf="submitted && signupForm.controls.email.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signupForm.controls.email.errors.required">Email is
+          required!</small>
+        <small class="form-text text-warning" *ngIf="signupForm.controls.email.errors.email">Please provide a valid
+          email!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Password">
+      <input type="password" formControlName="password" name="password" id="password-id" class="form-control"
+             placeholder="Enter password">
+      <div *ngIf="submitted && signupForm.controls.password.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signupForm.controls.password.errors.required">Password is
+          required!</small>
+        <small class="form-text text-warning" *ngIf="signupForm.controls.password.errors.minlength">Password must be at
+          least 8 characters long!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Repeat Password">
+      <input type="password" formControlName="repeatpassword" name="repeatpassword" id="password-repeat-id"
+             class="form-control" placeholder="Repeat password">
+      <div *ngIf="submitted && signupForm.controls.repeatpassword.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signupForm.controls.repeatpassword.errors.required">Password is
+          required!</small>
+        <small class="form-text text-warning" *ngIf="signupForm.controls.repeatpassword.errors.minlength">Passwords must
+          match!</small>
+      </div>
+    </app-input-box>
+    <app-input-box label="Is admin?">
+      <input type="checkbox" name="isadmin" formControlName="isadmin" class="ml-3">
+    </app-input-box>
+  </form>
+</app-form-box>

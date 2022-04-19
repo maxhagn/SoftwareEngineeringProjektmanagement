@@ -1,0 +1,53 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<div class="row align-items-center top-container" *ngIf="ticket">
+  <div class="col-8">
+    <div class="row">
+      <div class="col-12">
+        <h3>Ticket: {{ticket.event.title}}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="row info-item">
+          <div class="col-12">
+            <div class="info-text"><b>Duration</b><br>
+              {{ticket.event.duration}}min
+            </div>
+          </div>
+        </div>
+        <div class="row info-item">
+          <div class="col-12">
+            <div class="info-text">
+              <b>Data and Time</b><br>
+              {{ticket.date}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row info-item">
+          <div class="col-12">
+            <div class="info-text">
+              <b>Hall</b><br>
+              {{ticket.hall}}
+            </div>
+          </div>
+        </div>
+        <div class="row info-item">
+          <div class="col-12">
+            <div class="info-text">
+              <b>Seats</b><br>
+              <p>{{concatSeats()}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <ngx-barcode6  [bc-format]="'codabar'"
+                   [bc-value]="ticket.barcode"
+                   [bc-display-value]="true">
+    </ngx-barcode6>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<app-error-box [error-message]="this.errorMessage"></app-error-box>
+<app-info-box [info-message]="this.infoMessage"></app-info-box>
+<app-content-header header-text="Your profile"></app-content-header>
+
+<div class="row pt-3">
+  <div class="col-2">
+    <div class="img-container">
+      <img src="assets/user_img.svg">
+    </div>
+  </div>
+  <div class="col-10 content-container">
+
+    <div class="row">
+      <div class="col-12">
+        <h3 *ngIf="user">{{this.user.firstname}} {{this.user.surname}}</h3>
+      </div>
+    </div>
+
+    <form [formGroup]="updateForm" class="form">
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12">
+              <div class="label">Password</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <button class="btn btn-primary" (click)="pwButtonToggle()">{{pwButtonTexts[pwButtonIndex]}}</button>
+              <div *ngIf="changePassword">
+                <label class="label" for="passwordinput">Password</label>
+                <input type="password" class="form-control" formControlName="password" id="passwordinput"
+                       (change)="this.sure=false">
+                <div *ngIf="submitted" class="error">
+                  <small class="form-text text-warning" *ngIf="pwerrorlength">Password must have 8 or more
+                    characters</small>
+                </div>
+                <label class="label" for="repeatpasswordinput">Repeat Password</label>
+                <input type="password" class="form-control" formControlName="repeatpassword" id="repeatpasswordinput"
+                       (change)="this.sure=false">
+                <div *ngIf="submitted" class="error">
+                  <small class="form-text text-warning" *ngIf="pwsame">Passwords must match</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-5">
+          <div class="form-group">
+            <label class="label" for="firstnameinput">First name</label>
+            <input type="text" class="form-control" id="firstnameinput" formControlName="firstname"
+                   (change)="this.sure=false">
+          </div>
+        </div>
+        <div class="col-6 offset-1">
+          <div class="form-group">
+            <label class="label" for="surname">Last name</label>
+            <input type="text" class="form-control" id="surname" formControlName="surname" (change)="this.sure=false">
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        <div class="col-12">
+          <div class="form-group">
+            <label class="label" for="emailinput" *ngIf="user">Current E-Mail: ({{this.user.email}})</label>
+            <input type="text" class="form-control" id="emailinput" formControlName="email" (change)="this.sure=false">
+            <div *ngIf="submitted && updateForm.controls.email.errors" class="error">
+            <small class="form-text text-warning" *ngIf="updateForm.controls.email.errors.email">Please provide a valid email!</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row info-section mt-2">
+        <div class="col-auto">
+          <button class="btn btn-success" (click)="submit(this.updateForm.value)">Change</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-danger" (click)="this.deleteSure=!this.deleteSure">Delete</button>
+        </div>
+      </div>
+
+      <div class="row mt-2 alert alert-warning fade show" role="alert" *ngIf="deleteSure">
+        <strong>{{deleteMessage}}</strong>
+        <button class="btn btn-danger" (click)="this.delete()">Delete</button>
+      </div>
+
+    </form>
+  </div>
+</div>

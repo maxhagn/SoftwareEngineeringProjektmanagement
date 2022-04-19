@@ -1,0 +1,21 @@
+<app-error-box [error-message]="errorMessage"></app-error-box>
+
+<app-form-box form-title="Sign in" back-link="/" (on-submit)="onSubmit(signinForm.value)">
+  <form [formGroup]="signinForm" class="form">
+    <app-input-box label="E-Mail" label-for="mailInput">
+      <input type="text" name="mail" formControlName="mail" class="form-control" id="mailInput" placeholder="Enter E-Mail">
+      <!--<div *ngIf="submitted && signinForm.controls.mail.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signinForm.controls.mail.errors.required">Your email is required!</small>
+        <small class="form-text text-warning" *ngIf="signinForm.controls.mail.errors.email">Pleas provide a valid email!</small>
+      </div> -->
+    </app-input-box>
+    <app-input-box label="Password" label-for="passwordInput">
+      <input type="password" name="password" formControlName="password" class="form-control" id="passwordInput" placeholder="Enter Password">
+      <!--<div *ngIf="submitted && signinForm.controls.password.errors" class="error">
+        <small class="form-text text-warning" *ngIf="signinForm.controls.password.errors.required">Your password is required!</small>
+        <small class="form-text text-warning" *ngIf="signinForm.controls.password.errors.minlength">Your password must be at least 8 characters long!</small>
+      </div>-->
+    </app-input-box>
+    <p class="message">Not registered yet? <a href="#" routerLink="/sign_up">Create an account</a></p>
+  </form>
+</app-form-box>

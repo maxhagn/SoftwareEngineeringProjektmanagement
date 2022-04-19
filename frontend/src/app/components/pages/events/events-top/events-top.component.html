@@ -1,0 +1,40 @@
+<app-content-header header-text="Top 10 events"></app-content-header>
+
+
+<app-input-box for="category">Category
+  <select class="form-control" [(ngModel)]="topTenQuery.category" id="category" (ngModelChange)="loadTopTenEvents()">
+    <option>ACTION</option>
+    <option>COMEDY</option>
+    <option>DOCUMENTATION</option>
+
+  </select>
+</app-input-box>
+<app-input-box for="month">Month
+  <select class="form-control" [(ngModel)]="month" id="month" (ngModelChange)="loadTopTenEvents()">
+    <option>JUNE {{getYearBefore()}}</option>
+    <option>JULY {{getYearBefore()}}</option>
+    <option>AUGUST {{getYearBefore()}}</option>
+    <option>SEPTEMBER {{getYearBefore()}}</option>
+    <option>NOVEMBER {{getYearBefore()}}</option>
+    <option>DECEMBER {{getYearBefore()}}</option>
+    <option>JANUARY {{getCurrYear()}}</option>
+    <option>FEBRUARY {{getCurrYear()}}</option>
+    <option>MARCH {{getCurrYear()}}</option>
+    <option>APRIL {{getCurrYear()}}</option>
+    <option>MAY {{getCurrYear()}}</option>
+    <option>JUNE {{getCurrYear()}}</option>
+    <option>JULY {{getCurrYear()}}</option>
+    <option>AUGUST {{getCurrYear()}}</option>
+    <option>SEPTEMBER {{getCurrYear()}}</option>
+    <option>OCTOBER {{getCurrYear()}}</option>
+    <option>NOVEMBER {{getCurrYear()}}</option>
+    <option>DECEMBER {{getCurrYear()}}</option>
+  </select>
+
+</app-input-box>
+<app-info-box></app-info-box>
+<h4 *ngIf="topTenEvents !== undefined && topTenEvents.length!== 0 ">Top 10 events for {{getMonth()}} {{getYear()}}</h4>
+<h4 *ngIf="topTenEvents !== undefined && topTenEvents.length === 0 "> No Top 10 events for {{getMonth()}} {{getYear()}}</h4>
+<div id="chartContainer" style="height: 370px; width: 100%;">
+</div>
+

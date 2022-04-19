@@ -1,0 +1,31 @@
+.info-text {
+  font-size: 1.2rem;
+}
+
+.info-item {
+  margin-top: 0.8rem;
+}
+
+.code-info {
+  font-size: 0.8rem;
+  color: #c6c6c6;
+  margin-top: 0.5rem;
+}
+
+.mov-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+img {
+  height: 80%;
+  width: 80%;
+}

@@ -1,0 +1,31 @@
+.hall-create-plan {
+  display: grid;
+  grid-gap: 2px;
+}
+
+.hall-create-item {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  font-weight: 500;
+}
+
+
+.nomargin {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.sameWidth {
+  width: 10rem;
+}
+
+.selectPriceCategory{
+  width: 15rem;
+}
+
+.screen {
+  background-color: darkgray;
+  color: white;
+}

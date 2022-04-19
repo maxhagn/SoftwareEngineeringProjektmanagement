@@ -1,0 +1,6 @@
+<div *ngIf="errorMessage.length > 0" class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>A problem occurred!</strong> {{ errorMessage }}
+  <button type="button" (click)="vanishError()" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

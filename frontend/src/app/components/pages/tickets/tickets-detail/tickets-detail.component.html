@@ -1,0 +1,129 @@
+<app-content-header header-text="Ticket details"></app-content-header>
+<app-error-box [error-message]="errorMessage"></app-error-box>
+<div class="row content" *ngIf="ticket">
+  <div class="col-3 action-buttons">
+    <div *ngIf="ticket && ticket.status === 'CANCELLED' || ticket.status === 'REFUNDED'" class="row align-items-start mb-4">
+      <div class="col-12">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <b class="text-xl-center" style="font-size: 1.3rem">This ticket was canceled and is not valid anymore.</b>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ticket && ticket.status === 'RESERVED'" class="row align-items-start mb-4">
+      <div class="col-12">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <button type="button" class="btn btn-success action-button" [routerLink]="['/ticket/finalize', ticket.id]">Reservierte Tickets kaufen</button>
+          </div>
+        </div>
+        <div class="row action-text">
+          <div class="col-12 action-text-content">
+            Hiermit können Sie ihre reservierten Tickets kaufen. Nach der Angabe ihrer Zahlungsdaten wird der Betrag von ihrem Konto abgebucht. Sie haben danach die Möglichkeit die Tickets zu stornieren.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ticket && ticket.status === 'BOUGHT'" class="row align-items-start mb-4">
+      <div class="col-12">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <button type="button" class="btn btn-danger action-button" (click)="this.cancelTicket()">Gekaufte Tickets stornieren</button>
+          </div>
+        </div>
+        <div class="row action-text">
+          <div class="col-12 action-text-content">
+            Hiermit können Sie ihre gekauften Tickets stornieren. Danach wird Ihnen ihr Betrag auf ihre ursprünglich benutzte Zahlungsart überwiesen.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ticket && ticket.status === 'RESERVED'" class="row align-items-start">
+      <div class="col-12">
+        <div class="row justify-content-center">
+          <div class="col-10">
+            <button type="button" class="btn btn-danger action-button" (click)="this.cancelTicket()">Reservierte Tickets stornieren</button>
+          </div>
+        </div>
+        <div class="row action-text">
+          <div class="col-12 action-text-content">
+            Hiermit können Sie ihre reservierten Tickets stornieren. Ihre Reservierung wird daraufhin ungültig und Sie müssen eine neue tätigen wenn Sie die Aufführung doch besuchen wollen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-9 info" *ngIf="ticket">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{ticket.event.title}}</h2>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text"><b>Duration</b><br>
+          {{ticket.event.duration}} minutes
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Description</b><br>
+          {{ticket.event.description}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Date and Time</b><br>
+          {{ticket.date.toLocaleString()}}
+        </div>
+      </div>
+    </div>
+    <div class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Hall</b><br>
+          {{ticket.hall}}
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ticketsAsSeats.length > 0" class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Seats</b><br>
+          <div *ngFor="let seat of ticketsAsSeats">
+            <p class="mb-1">Row {{seat.row}} Seat {{seat.col}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ticketsAsSections.size > 0" class="row info-item">
+      <div class="col-12">
+        <div class="info-text">
+          <b>Seats in sections</b>
+          <div *ngFor="let sectionname of getKeys()">
+            <p>You have {{getValues(sectionname).length}} seats inside area {{sectionname}}</p>
+            <!--<p><strong>{{sectionname}}:</strong> {{concatSeatString(getValues(sectionname))}}</p>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row info-item pt-2" *ngIf="ticket && ticket.status !== 'CANCELLED' && ticket.status !== 'REFUNDED'">
+      <div class="col-2">
+        <button class="btn btn-primary" (click)="printTicket()">Print ticket</button>
+      </div>
+      <div class="col-3">
+      <button class="btn btn-primary" (click)="downloadInvoice()" >Download Invoice</button>
+      </div>
+    </div>
+    <div class="row info-item pt-2" *ngIf="ticket && ticket.status === 'REFUNDED'">
+      <div class="col-3">
+        <button class="btn btn-primary" (click)="downloadCancellationInvoice()" >Download reversal invoice</button>
+      </div>
+    </div>
+  </div>
+</div>

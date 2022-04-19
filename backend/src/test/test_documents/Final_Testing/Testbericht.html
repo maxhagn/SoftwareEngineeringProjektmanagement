@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Testbericht</title>
+
+    <style>
+
+        body{
+            font-size: 1.5em;
+            margin: 1em;
+        }
+
+        button{
+            margin: 0em 1em 1em 0em;
+            padding: 1em;
+            font-size: inherit;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+
+        }
+
+        th {
+            padding: 1em;
+        }
+
+        td {
+            padding: 1em;
+        }
+
+        select {
+            font-size: 0.75em;
+            width: auto;
+        }
+
+
+        .label_span{
+            width: 5000px;
+        }
+
+        .label_container{
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 2em;
+
+        }
+
+        .label_div{
+            width: 200px;
+        }
+
+
+
+        .label_container textarea{
+            width: 1000px;
+            height: 100px;
+            font-size: inherit;
+            resize: none;
+        }
+
+        .text_div{
+
+        }
+
+        </style>
+
+    <script type='module'>
+
+        const protocol_DOM =  getSourceAsDOM('./Testprotokoll.html');
+        const number_testcases = protocol_DOM.getElementsByClassName('testcase').length;
+        const number_testcases_success = protocol_DOM.getElementsByClassName('testcase_success').length;
+        const number_testcases_failed = protocol_DOM.getElementsByClassName('testcase_failed').length;
+        const number_testcases_blocked = protocol_DOM.getElementsByClassName('testcase_blocked').length;
+        const number_testcases_not_available = protocol_DOM.getElementsByClassName('testcase_not_available').length;
+
+        const testcases_failed =  protocol_DOM.getElementsByClassName('testcase_failed');
+
+        console.log(testcases_failed);
+        console.log(testcases_failed.length);
+
+        const result_row = document.getElementById('results');
+
+        const sum_testcases_success = document.createElement('td');
+        const sum_testcases_failed = document.createElement('td');
+        const sum_testcases_blocked = document.createElement('td');
+        const sum_testcases_not_available = document.createElement('td');
+        const sum_testcases = document.createElement('td');
+
+        sum_testcases_success.innerText = number_testcases_success;
+        sum_testcases_failed.innerText = number_testcases_failed;
+        sum_testcases_blocked.innerText = number_testcases_blocked;
+        sum_testcases_not_available.innerText = number_testcases_not_available;
+        sum_testcases.innerText = number_testcases;
+
+        result_row.appendChild(sum_testcases_success);
+        result_row.appendChild(sum_testcases_failed);
+        result_row.appendChild(sum_testcases_blocked);
+        result_row.appendChild(sum_testcases_not_available);
+        result_row.appendChild(sum_testcases);
+
+        printTestcases(testcases_failed);
+
+
+        function getSourceAsDOM(url)
+        {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open('GET',url,false);
+            xmlhttp.send();
+            let parser = new DOMParser();
+            return parser.parseFromString(xmlhttp.responseText, 'text/html');
+        }
+
+        function printTestcases(testcases){
+
+            const testcases_failed_table = document.getElementById('testcases_failed');
+
+
+
+
+
+            for(let i = 0; i < testcases.length; i++){
+
+
+                let tc = testcases[i].cloneNode(true);
+
+                tc.appendChild(createRatingField());
+                tc.appendChild(createPriorityField());
+
+                testcases_failed_table.appendChild(tc);
+            }
+
+        }
+
+        function createPriorityField(){
+
+            let priority_field = document.createElement('td');
+            let priority_select = document.createElement('select');
+
+            let s1 = document.createElement('option');
+            s1.innerText = 'Sofortige Behebung';
+            s1.label = 'Sofortige Behebung';
+            priority_select.appendChild(s1);
+
+            let s2 = document.createElement('option');
+            s2.innerText = 'Behebung in nächster Version';
+            s2.label = 'Behebung in nächster Version';
+            priority_select.appendChild(s2);
+
+            let s3 = document.createElement('option');
+            s3.innerText = 'Korrektur erfolgt bei Gelegenheit';
+            s3.label = 'Korrektur erfolgt bei Gelegenheit';
+            priority_select.appendChild(s3);
+
+            let s4 = document.createElement('option');
+            s4.innerText = 'Korrekturplanung ist noch offen';
+            s4.label = 'Korrekturplanung ist noch offen';
+            priority_select.appendChild(s4);
+
+            priority_field.appendChild(priority_select);
+
+            return priority_field;
+
+        }
+
+        function createRatingField(){
+
+            let rating_field = document.createElement('td');
+            let rating_select = document.createElement('select');
+
+            let k1 = document.createElement('option');
+            k1.innerText = 'Fehlerhafte Spezifikation';
+            k1.value = 'Fehlerhafte Spezifikation';
+            rating_select.appendChild(k1);
+
+            let k2 = document.createElement('option');
+            k2.innerText = 'Systemabsturz';
+            k2.value = 'Systemabsturz';
+            rating_select.appendChild(k2);
+
+            let k3 = document.createElement('option');
+            k3.innerText = 'Wesentliche Funktionalität fehlerhaft';
+            k3.value = 'Wesentliche Funktionalität fehlerhaft';
+            rating_select.appendChild(k3);
+
+            let k4 = document.createElement('option');
+            k4.innerText = 'Funktionale Abweichung beziehungsweise Einschränkung';
+            k4.value = 'Funktionale Abweichung beziehungsweise Einschränkung';
+            rating_select.appendChild(k4);
+
+            let k5 = document.createElement('option');
+            k5.innerText = 'Geringfügige Abweichung';
+            k5.label = 'Geringfügige Abweichung';
+            rating_select.appendChild(k5);
+
+            let k6 = document.createElement('option');
+            k6.innerText = 'Schönheitsfehler';
+            k6.label = 'Schönheitsfehler';
+            rating_select.appendChild(k6);
+
+            rating_field.appendChild(rating_select);
+
+            return rating_field;
+        }
+
+
+
+
+
+    </script>
+
+</head>
+<body>
+
+<h1>Testbericht</h1>
+<table >
+    <tr>
+        <th>Anzahl erfolgreicher Testfälle</th>
+        <th>Anzahl fehlgeschlagener Testfälle</th>
+        <th>Anzahl blockierter Testfälle</th>
+        <th>Anzahl nicht vorhandener Testfälle</th>
+        <th>Anzahl Testfälle gesamt</th>
+    </tr>
+ <tr id='results'>
+ </tr>
+</table>
+
+
+<h2>Fehler</h2>
+<table id='testcases_failed'>
+    <tr>
+        <th>Testcase ID</th>
+        <th>Erwartetes Ergebnis</th>
+        <th>Tatsächliches Ergebnis</th>
+        <th>Bewertung</th>
+        <th>Priorisierung</th>
+    </tr>
+</table>
+
+<h2>Ergebnis des Testlaufs</h2>
+<span class="label_span" >
+
+</span>
+
+<div class="label_container">
+    <div class="label_div">
+        <label >Zustand der Software:</label>
+    </div>
+    <div>
+        <textarea></textarea>
+    </div>
+</div>
+
+<div class="label_container">
+    <div class="label_div">
+        <label >Qualitätsziele:</label>
+    </div>
+    <div class="text_div">
+        <textarea></textarea>
+    </div>
+</div>
+
+<div class="label_container">
+    <div class="label_div">
+        <label >Konsequenzen und Verbesserungen:</label>
+    </div>
+    <div>
+        <textarea></textarea>
+    </div>
+</div>
+
+<button onclick="window.print()">Bericht als PDF speichern</button>
+
+</body>
+</html>

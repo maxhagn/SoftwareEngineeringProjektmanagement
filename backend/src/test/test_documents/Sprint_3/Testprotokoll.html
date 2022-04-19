@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title>Testprotokoll</title>
+
+
+    <style>
+
+        body{
+            font-size: 1.5em;
+            margin: 1em;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+
+        }
+
+        th {
+            padding: 1em;
+        }
+
+        td {
+            padding: 0.25em;
+        }
+
+        button{
+            margin: 1em 1em 1em 0em;
+            padding: 1em;
+            font-size: inherit;
+        }
+
+
+        .testcase_success {
+            width: 1000px;
+            background-color: green;
+        }
+        .testcase_failed {
+            width: 1000px;
+            background-color: red;
+        }
+
+        .testcase_blocked {
+            width: 1000px;
+            background-color: yellow;
+        }
+
+        .testcase_not_available {
+            width: 1000px;
+        }
+
+        .testcase{
+
+        }
+
+
+
+
+    </style>
+
+
+</head>
+
+<body>
+
+<h1>Testprotokoll</h1>
+<h2>Basisdaten</h2>
+<table >
+    <tr>
+        <th>Name des Testers</th>
+        <th>Datum</th>
+        <th>Uhrzeit</th>
+        <th>Dauer</th>
+        <th>Revisionsnummer</th>
+    </tr>
+    <tr>
+        <td>Max H.</td>
+        <td>21.06.2020</td>
+        <td>12.30</td>
+        <td>2 h 30min</td>
+        <td>3077be7615c8efd4306bfe3fb03e4b4786eebee2</td>
+    </tr>
+</table>
+
+<h2>Testfälle</h2>
+
+<table  >
+    <tr>
+        <th>Testfall ID</th>
+        <th>Erwartetes Ergebnis</th>
+        <th>Tatsächliches Ergebnis</th>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-15-01</td>
+        <td> Benutzer wird erfolgreich angelegt, es kann sich angemeldet werden </td>
+        <td> Benutzer wird erfolgreich angelegt, es kann sich angemeldet werden </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-15-02</td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt (mail vergeben) </td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt (mail vergeben) </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-15-03</td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt </td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-16-01</td>
+        <td> Der Benutzer der zu diesen Angaben gehört wird eingeloggt und zur News-Seite weitergeleitet. </td>
+        <td> Der Benutzer der zu diesen Angaben gehört wird eingeloggt und zur News-Seite weitergeleitet. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-16-02</td>
+        <td> Es wird ein Fehler angezeigt, dass die Eingabe ungültig war und es wird im Browser kein Cookie gesetzt. </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-16-03</td>
+        <td> Es wird ein Fehler angezeigt, dass der Benutzer gesperrt ist und man kann sich danach auch nicht mit der richtigen Eingabe des Passworts anmelden. </td>
+        <td> Es wird ein Fehler angezeigt, dass der Benutzer gesperrt ist und man kann sich danach auch nicht mit der richtigen Eingabe des Passworts anmelden. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-17-01</td>
+        <td> Es wird die erste Seite (mit höchstens 20 Einträgen) angezeigt und unten sieht man wie viele Seiten es gibt und auf welcher man gerade ist. </td>
+        <td> Es wird die erste Seite (mit höchstens 20 Einträgen) angezeigt und unten sieht man wie viele Seiten es gibt und auf welcher man gerade ist. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-17-02</td>
+        <td> Benutzer welche das Datenbankfeld sing_in_attempts >= 5 haben sind gesperrt und diese die das Feld auf &lt; 5 haben sind entsperrt. </td>
+        <td> Benutzer welche das Datenbankfeld sing_in_attempts >= 5 haben sind gesperrt und diese die das Feld auf &lt; 5 haben sind entsperrt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-17-03</td>
+        <td> Der Text des Knopfs sollte von "Unlock user" zu "Lock user" wechseln und in der Datenbank sollte in dem Feld sing_in_attempts bei diesem Benutzer 0 stehen. </td>
+        <td> Der Text des Knopfs sollte von "Unlock user" zu "Lock user" wechseln und in der Datenbank sollte in dem Feld sing_in_attempts bei diesem Benutzer 0 stehen. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-18-01</td>
+        <td> Der User wird auf die News-Feed-Seite geleitet und es werden 6 News-Einträge pro Seite angezeigt. </td>
+        <td> Der User kommt auf die Startseite und kann von dort aus zu News navigieren. Dort werden 6 News-Einträge pro Seite angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-18-02</td>
+        <td> Der User wird auf die News-Feed-Seite geleitet und es wird "No new News" angezeigt. </td>
+        <td> Der User wird auf die News-Feed-Seite geleitet und es wird "There are no new news entries" angezeigt.</td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-19-01</td>
+        <td> Der User wird zu der Detailansicht von einem News Eintrag geleitet. </td>
+        <td> Dem User wird die Detailansicht des Eintrags angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-19-02</td>
+        <td> Der News-Eintrag ist nicht im News-Feed. </td>
+        <td> Es wird kein news Eintrag angezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-20-01</td>
+        <td> Es werden gelesene News-Einträge angezeigt. </td>
+        <td> Die gelesenen Einträge werden angezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-20-02</td>
+        <td> Es erscheint kein "View old News"-Button. </td>
+        <td> Es wird kein Button angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-21-01</td>
+        <td> Erstellte News Entry  wird mit einem Bild sowie Name des Autors, Datum und einer Zusammenfassung angezeigt </td>
+        <td> Erstellte News Entry  wird mit einem Bild sowie Name des Autors, Datum und einer Zusammenfassung angezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-21-02</td>
+        <td> News Entry wurde nicht erstellt und eine Fehlermeldung erscheint </td>
+        <td> News Entry wurde nicht erstellt und eine Fehlermeldung erscheint </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-21-03</td>
+        <td> News Entry wurde nicht erstellt und eine Fehlermeldung erscheint </td>
+        <td> News Entry wurde nicht erstellt und eine Fehlermeldung erscheint </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-22-01</td>
+        <td> User wird geändert </td>
+        <td> Der Benutzer wird geändert und auf die Startseite weitergeleitet </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-22-02</td>
+        <td> Fehler wird gezeigt </td>
+        <td> Der Fehler "A problem occurred! {"error":"Invalid attribute: firstname must not only contain whitespaces"}" wird angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-23-01</td>
+        <td> User wird gelöscht, wird ausgeloggt und kann sich nicht mehr einloggen </td>
+        <td> Der User wird gelöscht und auf die Startseite weiter geleitet. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-24-01</td>
+        <td> Ein Chart generiert, bei dem der User auf Events klicken kann. </td>
+        <td> Ein Chart wird bei ACTION und JUNE ausgegeben und man kann auf das Event klicken. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-24-02</td>
+        <td> Es wird kein Chart generiert und die Nachricht "No Events for {{category}} in {{month}}" wird ausgegeben. </td>
+        <td> Es wird kein Chart generiert und es wird die Nachricht No Events for {{category}} in {{month}}" ausgegeben. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-24-03</td>
+        <td> Der User wird auf die Event-Detail-Page gebracht. </td>
+        <td> Der User wird auf die Event-Detail-Page weitergeleitet. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-25-01</td>
+        <td> Es werden die ersten 12 Artists aus der Datenbank ausgegeben. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Es werden die ersten 12 Artists aus der Datenbank ausgegeben. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-25-02</td>
+        <td> Es werden die ersten 12 Artists aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Nach der Eingabe eines Suchtextes und dem Bestätigen mit Enter verändert sich die Seite nicht. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-25-03</td>
+        <td> Der Vor- und Nachname des Künstlers werden angezeigt. Des Weiteren wird eine Liste mit allen Veranstaltungen angezeigt, bei denen dieser Künstler auftritt. </td>
+        <td> Der Vor- und Nachname des Künstlers werden angezeigt. Des Weiteren wird eine Liste mit allen Veranstaltungen angezeigt, bei denen dieser Künstler auftritt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-25-04</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass der Eintrag nicht in der Datenbank gefunden wurde. </td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass ein Fehler beim Datenzugriff aufgetreten ist. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-25-05</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass ein Fehler beim Datenzugriff aufgetreten ist. </td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass ein Fehler beim Datenzugriff aufgetreten ist. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-01</td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-02</td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten.</td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten.</td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-03</td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Es werden die ersten 12 Locations aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-04</td>
+        <td>  Die Detailinformationen werden angezeigt, wie Name, Straße, Stadt und Postleitzahl. Des Weiteren wird eine Liste mit allen Veranstaltungen angezeigt, die in dieser Location stattfinden. </td>
+        <td>  Die Detailinformationen werden angezeigt, wie Name, Straße, Stadt und Postleitzahl. Des Weiteren wird eine Liste mit allen Veranstaltungen angezeigt, die in dieser Location stattfinden. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-05</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass der Eintrag nicht in der Datenbank gefunden wurde. </td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass der Eintrag nicht in der Datenbank gefunden wurde. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-26-06</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass ein Fehler beim Datenzugriff aufgetreten ist. </td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass der Eintrag nicht in der Datenbank gefunden wurde. </td>
+    </tr>
+
+    <tr class="testcase_failed testcase">
+        <td>ST-27-01</td>
+        <td> Es werden die ersten 12 Events aus der Datenbank ausgegeben. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Es sind keine 12 Elemente in der Testdatenbank </td>
+    </tr>
+
+    <tr class="testcase_failed testcase">
+        <td>ST-27-02</td>
+        <td> Es werden die ersten 12 Events aus der Datenbank ausgegeben, die in Verbindung mit dem Suchtext stehen. Des Weiteren erscheint eine Seiten-Navigation mit der aktuellen Seitennummer und der insgesamten Anzahl an Seiten. </td>
+        <td> Die Mixed Search funktioniert. Die Detailed Search Funktioniert nicht. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-27-03</td>
+        <td> Der Titel des Events, die Dauer, die Kategorie und der Künstler, der in diesem Event auftritt, werden angezeigt. Des Weiteren wird eine Liste mit allen Veranstaltungen angezeigt, die für diesen Event geplant sind. </td>
+        <td> Der Benutzer wird auf die richtige Ticket Detail Seite weitergeleitet. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-27-04</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass der Eintrag nicht in der Datenbank gefunden wurde. </td>
+        <td> Fehlermeldung "Event does not exist" wird angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-27-05</td>
+        <td> Die Überschriften werden nicht angezeigt und es erscheint eine Fehlermeldung, dass ein Fehler beim Datenzugriff aufgetreten ist. </td>
+        <td> Fehlermeldung "Event does not exist" wird angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-28-01</td>
+        <td> Wenn die Performance-Liste geladen wird bekommt der Benutzer die ersten 6 Einträge aus der Datenbank angezeigt. Zu dem wird die aktuelle Seitennummer, die Anzahl der Seiten und die Einträge per Seite angezeigt. </td>
+        <td> Wenn die Performance-Liste geladen wird bekommt der Benutzer die ersten 6 Einträge aus der Datenbank angezeigt. Zu dem wird die aktuelle Seitennummer, die Anzahl der Seiten und die Einträge per Seite angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-28-02</td>
+        <td> Der Benutzer sucht nach einer Query bei der keine Performances gefunden werden. </td>
+        <td> Der Benutzer sucht nach einer Query bei der keine Performances gefunden werden. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-29-01</td>
+        <td> Ein Administator erstellt eine neue gültige Veranstaltung. </td>
+        <td> Ein Administator erstellt eine neue gültige Veranstaltung. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-29-02</td>
+        <td> Ein Kunde und kein Administrator erstellt eine neue Veranstaltung. </td>
+        <td> Ein Kunde und kein Administrator erstellt eine neue Veranstaltung. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-29-03</td>
+        <td> Ein Administator erstellt eine neue Veranstaltung, allerdings mit leeren Datenfeldern. </td>
+        <td> Ein Administator erstellt eine neue Veranstaltung, allerdings mit leeren Datenfeldern. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-30-01</td>
+        <td> Ich sehe einen Saalplan mit 3 reservierten Sitzen </td>
+        <td> Ich sehe einen Saalplan mit 3 reservierten Sitzen </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-31-01</td>
+        <td> Ich sehe einen Saalplan mit 2 Sektionen </td>
+        <td> Ich sehe einen Saalplan mit 2 Sektionen </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-32-01</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-32-02</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-32-03</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-33-01</td>
+        <td> Es wird einem eine Fehlermeldung angezeigt </td>
+        <td> Die Fehlermeldung "You have to select at least one seat" wird angezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-33-02</td>
+        <td> Man hat eine Übersicht von seinen Ticket bevor man es reserviert </td>
+        <td> Man sieht eine Übersicht über die reservierten Tickets. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-34-01</td>
+        <td>Wenn die Ticket-Liste geladen wird bekommt der Benutzer die ersten 4 Einträge aus der Datenbank angezeigt. Es werden sowohl 4 gekaufte Tickets, als auch 4 reservierte Tickets angezeigt. Zu dem wird die aktuelle Seitennummer, die Anzahl der Seiten und die Einträge per Seite für jede Ticketart angezeigt. </td>
+        <td> Wenn die Ticket-Liste geladen wird bekommt der Benutzer die ersten 4 Einträge aus der Datenbank angezeigt. Es werden sowohl 4 gekaufte Tickets, als auch 4 reservierte Tickets angezeigt. Zu dem wird die aktuelle Seitennummer, die Anzahl der Seiten und die Einträge per Seite für jede Ticketart angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-34-02</td>
+        <td> Der angemeldete Benutzer hat noch keine gekauften oder reservierten Tickets. </td>
+        <td> Der angemeldete Benutzer hat noch keine gekauften oder reservierten Tickets.</td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-35-01</td>
+        <td> Ticket in der Datenbank auf cancelled gesetzt und auf der ticket detail page keine Aktionen verfügbar und info das das Ticket storniert ist </td>
+        <td> Ticket wird auf cancelled gesetzt und auf der Ticket Detail Page sind keine Aktionen mehr möglich. Ticket wird auch nicht mehr in Ticket Page View angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-35-02</td>
+        <td> Wenn man auf die Ticket Detail Seite geht ist der Butten zum stornieren der Reservierung nicht da </td>
+        <td> "Reserviertes Ticket Stornieren"- Button ist nicht mehr da! </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-36-01</td>
+        <td> Man wird zu finalize Seite weitergeletiet und kann seine Tickets nochmal anpassen </td>
+        <td> Man wird zur finalize Seite weitergeleitet und kann die Tickets erneut anpassen. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-36-02</td>
+        <td> Eine Fehlermeldung wird auf der finalize Seite angezeigt. </td>
+        <td> Fehler "The requested performance is in the past" wird angezeigt.</td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-37-01</td>
+        <td> Ticket in der Datenbank auf refunded gesetzt und auf der ticket detail page nur Aktion für Stornorechnung und info das das Ticket storniert ist </td>
+        <td> Nur Stornorechnung kann gedruckt werden. Ticket wird auf refunded gesetzt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-37-02</td>
+        <td>Wenn man auf die Ticket Detail Seite geht ist der Butten zum stornieren des gekauften Tickets nicht da </td>
+        <td> Button wird nicht angezeigt. </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-38-01</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-38-02</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-38-03</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-39-01</td>
+        <td> Ticket wird storniert und anschließend kann die Druckansicht aufgerufen werden. </td>
+        <td> Ticket wird storniert. Pdf kann runter geladen werden. Rechnung wird nicht gelöscht. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-40-01</td>
+        <td> Benutzer wird erfolgreich angelegt, es kann sich angemeldet werden, diesen test einmal mit admin, einmal ohne durchführen -> kann neuer admin user auf admin funktionen zugreifen </td>
+        <td> Beide Benutzergruppen können angelegt werden. Meldung "Account has been created successfully" erscheint</td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-40-02</td>
+        <td> Benutzer wird nicht angelegt, es wird eine Fehlermeldung gezeigt (mail vergeben) </td>
+        <td> Fehlermeldung " {"error":"Create failed. Email is already used by another user."}" erscheint. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-40-03</td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt </td>
+        <td> Frontend Validations fangen das Anlegen ab. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-40-04</td>
+        <td> Benutzer wird nicht angelegt, es wird eine fehlermeldung gezeigt </td>
+        <td> Error Code Unauthorized kommt zurück. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-41-01</td>
+        <td> Der Text des Buttons wechselt zu "Unlock user" und in der Datenbank wird das Feld sing_in_attempts auf 5 gesetzt. </td>
+        <td> Der Text des Buttons wechselt zu "Unlock user" und in der Datenbank wird das Feld sing_in_attempts auf 5 gesetzt. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-41-02</td>
+        <td> Es wird ein Fehler ausgegeben, dass der eigenen Nutzer nicht gesperrt werden kann, außerdem wird an der Datenbank nichts geändert. </td>
+        <td> Es wird ein Fehler ausgegeben, dass der eigenen Nutzer nicht gesperrt werden kann, außerdem wird an der Datenbank nichts geändert. </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-42-01</td>
+        <td> Benachrichtigung auf Page-top das reset erfolgt ist </td>
+        <td> Benachrichtigung auf Page-top das reset erfolgt ist </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-42-02</td>
+        <td> Keine user werden angezeigt </td>
+        <td> Keine user werden angezeigt </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-42-03</td>
+        <td> Meldung das berechtigungen fehlt als antwort </td>
+        <td> Meldung das berechtigungen fehlt als antwort </td>
+    </tr>
+
+    <tr class="testcase_success testcase">
+        <td>ST-43-01</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt, auf /ticket/200 oder /ticket/200/print zugegriffen, ticket wird angezeigt.</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt, auf /ticket/200 oder /ticket/200/print zugegriffen, ticket wird angezeigt. </td>
+    </tr>
+    <tr class="testcase_success testcase">
+        <td>ST-43-02</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt, auf /ticket/201 oder /ticket/201/print zugegriffen (existiert nicht), wird "not authorized" angezeigt, nicht "ticket doesnt exist".</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt, auf /ticket/201 oder /ticket/201/print zugegriffen (existiert nicht), wird "not authorized" angezeigt, nicht "ticket doesnt exist". </td>
+    </tr>
+    <tr class="testcase_success testcase">
+        <td>ST-43-03</td>
+        <td> Wenn mit generateRealDB gestartet und NICHT als user1@user.com eingeloggt, auf /ticket/200 oder /ticket/200/print zugegriffen, ticket wird nicht angezeigt - keine berechtigung.</td>
+        <td> Wenn mit generateRealDB gestartet und NICHT als user1@user.com eingeloggt, auf /ticket/200 oder /ticket/200/print zugegriffen, ticket wird nicht angezeigt - keine berechtigung. </td>
+    </tr>
+    <tr class="testcase_success testcase">
+        <td>ST-43-04</td>
+        <td> Bei Zugriff auf GET localhost:8080/api/v1/ticket/200 über postman ohne sessioncookie, fehler wird gezeigt, kein ticket</td>
+        <td> Bei Zugriff auf GET localhost:8080/api/v1/ticket/200 über postman ohne sessioncookie, fehler wird gezeigt, kein ticket </td>
+    </tr>
+    <tr class="testcase_success testcase">
+        <td>ST-43-05</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt und auf /ticket/200 zugegriffen wird bei drücken auf print ticket ein ticket druck dialog angezeigt</td>
+        <td> Wenn mit generateRealDB gestartet und als user1@user.com eingeloggt und auf /ticket/200 zugegriffen wird bei drücken auf print ticket ein ticket druck dialog angezeigt </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-44-01</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-44-02</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+    <tr class="testcase_not_available testcase">
+        <td>ST-44-03</td>
+        <td> N/A </td>
+        <td> N/A </td>
+    </tr>
+
+
+</table>
+
+<button onclick="window.print()">Bericht als PDF speichern</button>
+
+</body>
+
+</html>
